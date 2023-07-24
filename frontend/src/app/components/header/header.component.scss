@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css?family=Lobster&display=swap');
+
+.header {
+  width: 100vw;
+  height: 3rem;
+
+  position: fixed;
+  top: 10px;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.header .logo {
+  height: 100%;
+
+  margin-left: 1rem;
+  margin-right: auto;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-direction: row;
+
+  text-decoration: none;
+  transition: 0.4s;
+}
+
+.header .logo:hover {
+  transform: scale(102%);
+  transition: 0.4s;
+}
+
+.header .logo img {
+  height: 80%;
+  object-fit: cover;
+  margin-right: 1rem;
+}
+
+.header .logo span {
+  font-family: "Lobster", sans-serif;
+  font-size: 2rem;
+  color: #fefefe;
+  text-shadow: 0 0 4px #0006;
+}
+
+.header .menu {
+  background: rgb(238, 174, 202);
+  background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+
+  width: 40%;
+  height: 100%;
+
+  box-shadow: 0 0 10px 4px #0002;
+
+  border-radius: 0.4rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.header .menu nav {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: row;
+}
+
+.header .menu nav a {
+  text-decoration: none;
+  color: white;
+  font-weight: 800;
+  transition: 0.4s;
+}
+
+.header .menu nav a:hover {
+  font-size: 1.14rem;
+}
+
+.header .account {
+  height: 100%;
+
+  margin-left: auto;
+  margin-right: 1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: row;
+}
+
+.header .account button {
+  width: 200px;
+  height: 100%;
+
+  border: none;
+  border-radius: 0.4rem;
+
+  box-shadow: 0 0 10px 4px #0002;
+
+  font-family: "Muli", sans-serif;
+  font-size: 1.1rem;
+  color: white;
+}
+
+.header .account .login {
+  background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+  transition: 0.4s;
+}
+
+.header .account .login:hover {
+  background: radial-gradient(circle, rgba(218, 184, 222, 1) 0%, rgba(148, 187, 233, 1) 100%);
+  transition: 0.4s;
+}
+
+.header .account .login:active {
+  background: radial-gradient(circle, rgba(208, 194, 242, 1) 0%, rgba(148, 187, 233, 1) 100%);
+  transition: 0.4s;
+}
+

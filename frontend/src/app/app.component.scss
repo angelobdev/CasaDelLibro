@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
+:root {
+  --light-primary: #FFCF9C;
+  --light-secondary: #B96D40;
+  --dark-primary: #CA054D;
+  --dark-secondary: #3B1C32;
+  --details: #A4D4B4;
+}
+
+* {
+  font-family: "Muli", sans-serif;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#background {
+  width: 100vw;
+  height: 100vh;
+  z-index: -999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: url("https://static.vecteezy.com/system/resources/previews/008/407/889/original/bold-abstract-beige-seamless-pattern-modern-minimalistic-geometric-semicircular-print-in-beige-gray-and-coral-tones-simple-decorative-repeating-texture-background-wallpaper-design-vector.jpg");
+  background-size: 30% auto;
+  box-shadow: inset 0 0 0 100vw #0003;
+}
