@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {faCoffee} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-footer',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class FooterComponent {
 
+  faCoffee = faCoffee;
 }
