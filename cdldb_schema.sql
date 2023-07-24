@@ -13,6 +13,13 @@ CREATE TABLE IF NOT EXISTS ruoli
     PRIMARY KEY (id)
 );
 
+-- Per il corretto funzionamento del codice il ruolo utente deve avere ID = 1;
+INSERT INTO ruoli (id, nome, grado)
+VALUES ('ROLE_UTENTE', 1);
+
+INSERT INTO ruoli (nome, grado)
+VALUES ('ROLE_ADMIN', 999);
+
 -- Utenti
 CREATE TABLE IF NOT EXISTS utenti
 (

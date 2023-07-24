@@ -16,3 +16,10 @@ spring:
               dialect: PostgreSQLDialect
         # Hibernate ddl auto (create, create-drop, validate, update)
         ddl-auto: update
+
+# App Properties
+com:
+  angelobdev:
+    casadellibro:
+      jwtSecret: bm9uc29jaGVjaGlhdmV1c2FyZW1hc29jaGVkZXZlZXNzZXJlbHVuZ2EyNTZiaXRz==
+      jwtExpirationMs: 10800000 # 3 hours
