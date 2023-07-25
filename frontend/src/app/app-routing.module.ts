@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {HomeComponent} from "./routes/home/home.component";
 import {BibliotecaComponent} from "./routes/biblioteca/biblioteca.component";
 import {ContattiComponent} from "./routes/contatti/contatti.component";
-import {LoginComponent} from "./routes/login/login.component";
+import {ServiziComponent} from "./routes/servizi/servizi.component";
 
 const routes: Routes = [
   {
@@ -15,12 +15,12 @@ const routes: Routes = [
     component: BibliotecaComponent,
   },
   {
-    path: 'contatti',
-    component: ContattiComponent,
+    path: 'servizi',
+    component: ServiziComponent,
   },
   {
-    path: 'login',
-    component: LoginComponent,
+    path: 'contatti',
+    component: ContattiComponent,
   },
 ];
 

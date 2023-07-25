@@ -48,7 +48,7 @@ header .menu {
 
   background: linear-gradient(to bottom right, #ff5900, #ff9900);
 
-  width: 50%;
+  width: 70%;
   height: 100%;
 
   box-shadow: 0 0 10px 4px #0002;
@@ -59,6 +59,8 @@ header .menu {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
+  margin-right: 1rem;
 }
 
 header .menu nav {
@@ -69,65 +71,57 @@ header .menu nav {
   flex-direction: row;
 }
 
-header .menu nav a {
+header .menu nav a, button {
   text-decoration: none;
   color: white;
+  font-family: "Muli", sans-serif;
+  font-size: 1rem;
   font-weight: 800;
+  transition: 0.4s;
+  border: 0;
+  background: transparent;
+}
+
+header .menu nav a:hover, button:hover {
+  cursor: pointer;
+  transform: scale(104%);
   transition: 0.4s;
 }
 
-header .menu nav a:hover {
-  font-size: 1.14rem;
+header .menu nav .spacer {
+  margin-left: 20%;
+  margin-right: 20%;
 }
 
-header .account {
-  width: 20%;
-  height: 100%;
+#login-container {
+  background: white;
 
-  margin-left: auto;
-  margin-right: 1rem;
+  position: absolute;
+  top: 20vh;
 
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  flex-direction: row;
-}
+  width: 30vw;
+  height: 50vh;
 
-header .account a {
-  width: 180px;
-  height: 80%;
-
-  border: none;
-  border-radius: 0.8rem;
-
-  box-shadow: 0 0 10px 4px #0002;
-
-  font-family: "Muli", sans-serif;
-  font-size: 1.1rem;
-  color: white;
+  border: 1px solid #0002;
+  border-radius: 0.4rem;
 
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 
-  text-decoration: none;
-
-  margin-left: auto;
+  box-shadow: 0 0 10px #0002;
 }
 
-header .account .login {
-  background: linear-gradient(to bottom right, #b700ff, #8c00ff);
-  transition: 0.4s;
+#login-container > button {
+  color: black;
+  position: absolute;
+  right: 0.4rem;
+  top: 0.4rem;
 }
 
-header .account .login:hover {
-  background: linear-gradient(to bottom right, #c645f8, #b55cfd);
-  transition: 0.4s;
-}
-
-header .account .login:active {
-  background: linear-gradient(to bottom right, #d984fa, #c183f5);
-  transition: 0.4s;
+app-login {
+  width: 90%;
+  height: 90%;
 }
 
