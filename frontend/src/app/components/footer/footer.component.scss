@@ -1,15 +1,48 @@
 footer {
+  background: #000a;
 
+  width: 100vw;
+  height: 2rem;
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
 }
 
 footer .social-icons {
+  margin-left: 1rem;
+  color: white;
+}
 
+footer .social-icons a {
+  margin-right: 0.4rem;
+  color: #fffc;
+}
+
+footer .social-icons a:hover{
+  color: #fffa;
+  cursor: pointer;
 }
 
 footer .credits {
-
+  margin-right: 1rem;
 }
 
 footer .credits span {
-
+  color: white;
 }
+
+footer .credits span a {
+  color: #fffc;
+  text-decoration: none;
+}
+
+footer .credits span a:hover {
+  color: #fffa
+}
+
