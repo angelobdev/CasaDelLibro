@@ -15,6 +15,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
+import {HttpClientModule} from "@angular/common/http";
+import {httpInterceptorProviders} from "./helpers/http.interceptor";
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -31,13 +34,15 @@ import {MatInputModule} from "@angular/material/input";
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
     FontAwesomeModule,
     BrowserAnimationsModule,
     MatDialogModule,
     MatButtonModule,
-    MatInputModule
+    MatInputModule,
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule {

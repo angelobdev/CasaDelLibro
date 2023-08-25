@@ -9,11 +9,21 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UtentiService implements UserDetailsService {
 
     @Autowired
     private UtentiRepository utentiRepository;
+
+    public Utente getUtente(Integer id) {
+        return utentiRepository.findById(id).orElse(null);
+    }
+
+    public List<Utente> getAllUtenti() {
+        return utentiRepository.findAll();
+    }
 
     @Override
     @Transactional

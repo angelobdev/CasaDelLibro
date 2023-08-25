@@ -1,14 +1,46 @@
 <div class="wrapper">
   <h3 class="title">Login</h3>
   <div class="content">
-    <form>
+    <form
+      *ngIf="!isLoggedIn"
+      name="form"
+      (ngSubmit)="f.form.valid && onSubmit()"
+      #f="ngForm"
+      novalidate
+    >
       <div class="form-field">
         <label>Username</label>
-        <input name="username" placeholder="Username...">
+        <input
+          type="text"
+          class="form-control"
+          name="username"
+          [(ngModel)]="form.username"
+          required
+          #username="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && username.errors }"
+        >
+        <div *ngIf="username.errors && f.submitted" class="invalid-feedback">
+          Username is required!
+        </div>
       </div>
       <div class="form-field">
         <label>Password</label>
-        <input name="password" placeholder="Password...">
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          [(ngModel)]="form.password"
+          required
+          minlength="6"
+          #password="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
+        />
+        <div *ngIf="password.errors && f.submitted" class="invalid-feedback">
+          <div *ngIf="password.errors['required']">Password is required</div>
+          <div *ngIf="password.errors['minlength']">
+            Password must be at least 6 characters
+          </div>
+        </div>
       </div>
       <div class="form-actions">
         <input type="submit" value="Accedi">
@@ -26,6 +58,10 @@
     </div>
     <br>
     <a routerLink="register">Registrati</a>
+  </div>
+
+  <div class="alert alert-success" *ngIf="isLoggedIn">
+    Logged in as {{ roles }}.
   </div>
 </div>
 

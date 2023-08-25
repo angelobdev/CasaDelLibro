@@ -1,5 +1,6 @@
 package com.angelobdev.casadellibro.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -29,18 +30,22 @@ public class Utente implements UserDetails {
     @Column(name = "cognome")
     private String cognome;
 
+    @JsonIgnore
     @Column(name = "data_nascita")
     private Date dataNascita;
 
     @Column(name = "username")
     private String username;
 
+    @JsonIgnore
     @Column(name = "email")
     private String email;
 
+    @JsonIgnore
     @Column(name = "password")
     private String password;
 
+    @JsonIgnore
     @Column(name = "avatar")
     private String avatar;
 

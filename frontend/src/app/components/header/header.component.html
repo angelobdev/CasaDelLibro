@@ -9,12 +9,16 @@
       <a href="/servizi">Servizi</a>
       <a href="/contatti">Contatti</a>
       <div class="spacer"></div>
-      <button (click)="toggleLoginVisibility()">Login</button>
+      <span *ngIf="isLoggedIn">Ciao, {{username}} </span>
+      <button *ngIf="isLoggedIn" (click)="logout()">Logout</button>
+      <button *ngIf="!isLoggedIn" (click)="toggleLoginVisibility()">Login</button>
     </nav>
   </div>
 
   <div id="login-container" *ngIf="loginIsVisible">
-    <button (click)="toggleLoginVisibility()"><fa-icon [icon]="faClose"></fa-icon></button>
+    <button (click)="toggleLoginVisibility()">
+      <fa-icon [icon]="faClose"></fa-icon>
+    </button>
     <app-login></app-login>
   </div>
 
