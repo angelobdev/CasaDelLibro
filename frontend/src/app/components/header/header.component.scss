@@ -71,6 +71,26 @@ header .menu nav {
   flex-direction: row;
 }
 
+header .menu nav .right-content {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: row;
+}
+
+.avatar {
+  height: 2rem;
+  object-fit: cover;
+  margin-right: 0.4rem;
+  border-radius: 100%;
+}
+
+.logout{
+  border-left: 2px solid white;
+  margin-left: 0.4rem;
+}
+
 header .menu nav a, button, span {
   text-decoration: none;
   color: white;
@@ -125,4 +145,3 @@ app-login {
   width: 90%;
   height: 90%;
 }
-

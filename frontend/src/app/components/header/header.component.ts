@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
   registerIsVisible = false;
 
   username: string | undefined = "";
-  avatar: string | any = "";
+  avatar: string | undefined = "";
   isLoggedIn = false;
 
   constructor(private authService: AuthService, private storageService: StorageService, private utenteService: UtenteService) {
@@ -30,7 +30,11 @@ export class HeaderComponent implements OnInit {
     if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;
       this.username = this.storageService.getUser()?.username;
-      this.avatar = this.utenteService.getAvatar(this.username!).subscribe();
+      this.utenteService.getAvatar(this.username!).subscribe({
+        next: data => {
+          this.avatar = data.message;
+        },
+      });
     }
   }
 

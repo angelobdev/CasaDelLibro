@@ -14,6 +14,6 @@ export class UtenteService {
   }
 
   getAvatar(username: string): Observable<any> {
-    return this.http.get(this.URL + "avatar/" + username);
+    return this.http.get<string>(this.URL + "avatar/" + username);
   }
 }

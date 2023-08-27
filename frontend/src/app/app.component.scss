@@ -32,5 +32,11 @@ body {
 }
 
 .container {
-  padding-top: 3.5rem;
+  padding-top: 4.5rem;
+  width: 100vw;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
