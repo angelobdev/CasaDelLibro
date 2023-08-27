@@ -17,12 +17,11 @@ public class UtentiService implements UserDetailsService {
     @Autowired
     private UtentiRepository utentiRepository;
 
-    public Utente getUtente(Integer id) {
-        return utentiRepository.findById(id).orElse(null);
-    }
-
-    public List<Utente> getAllUtenti() {
-        return utentiRepository.findAll();
+    public String getAvatarFromUsername(String username) throws UsernameNotFoundException {
+        Utente utente = utentiRepository.findByUsername(username).orElse(null);
+        if (utente == null)
+            throw new UsernameNotFoundException(username + " non trovato!");
+        return utente.getAvatar();
     }
 
     @Override

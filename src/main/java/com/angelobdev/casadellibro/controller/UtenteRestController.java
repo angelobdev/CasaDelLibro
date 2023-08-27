@@ -1,0 +1,20 @@
+package com.angelobdev.casadellibro.controller;
+
+import com.angelobdev.casadellibro.service.UtentiService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/user")
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials = "true")
+public class UtenteRestController {
+
+    @Autowired
+    private UtentiService utentiService;
+
+    @GetMapping("/avatar/{username}")
+    public String getAvatar(@PathVariable String username){
+        return utentiService.getAvatarFromUsername(username);
+    }
+
+}

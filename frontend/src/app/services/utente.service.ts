@@ -1,35 +1,19 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Utente} from "../models/utente.model";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtenteService {
 
-  URL = "http://localhost:8080/utent"
+  URL = "http://localhost:8080/api/user/"
 
-  constructor(private http: HttpClient) { }
-
-  // Metodi CRUD:
-
-  createUtente(utente: Utente){
-
+  constructor(private http: HttpClient) {
   }
 
-  getUtente(id: number) {
-
-  }
-
-  getAllUtenti(){
-
-  }
-
-  updateUtente(id:number, utente: Utente){
-
-  }
-
-  deleteUtente(id: number){
-
+  getAvatar(username: string): Observable<any> {
+    return this.http.get(this.URL + "avatar/" + username);
   }
 }

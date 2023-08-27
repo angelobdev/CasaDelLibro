@@ -22,4 +22,16 @@ public class JwtResponse {
         this.email = email;
         this.roles = roles;
     }
+
+    @Override
+    public String toString() {
+        return "JwtResponse{" +
+                "token='" + token + '\'' +
+                ", type='" + type + '\'' +
+                ", id=" + id +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", roles=" + roles +
+                '}';
+    }
 }

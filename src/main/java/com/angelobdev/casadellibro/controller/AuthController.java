@@ -9,6 +9,8 @@ import com.angelobdev.casadellibro.repository.RuoloRepository;
 import com.angelobdev.casadellibro.repository.UtentiRepository;
 import com.angelobdev.casadellibro.security.JwtUtils;
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,6 +30,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/auth")
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials = "true")
 public class AuthController {
+
+    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -100,7 +104,25 @@ public class AuthController {
 
         utentiRepository.save(utente);
 
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(utente.getUsername(), registerRequest.getPassword()));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String jwt = jwtUtils.generateJwtToken(authentication);
+
+        List<String> roles = utente.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(
+                new JwtResponse(
+                        jwt,
+                        utente.getId(),
+                        utente.getUsername(),
+                        utente.getEmail(),
+                        roles
+                )
+        );
     }
 
 }

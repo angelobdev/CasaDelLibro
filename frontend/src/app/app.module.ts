@@ -15,9 +15,10 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
-import {HttpClientModule} from "@angular/common/http";
-import {httpInterceptorProviders} from "./helpers/http.interceptor";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
+import {NgOptimizedImage} from "@angular/common";
+import {HttpRequestInterceptor} from "./helpers/http.interceptor";
 
 
 @NgModule({
@@ -29,7 +30,7 @@ import {FormsModule} from "@angular/forms";
     ContattiComponent,
     HomeComponent,
     ServiziComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,8 +42,15 @@ import {FormsModule} from "@angular/forms";
     MatDialogModule,
     MatButtonModule,
     MatInputModule,
+    NgOptimizedImage,
   ],
-  providers: [httpInterceptorProviders],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpRequestInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

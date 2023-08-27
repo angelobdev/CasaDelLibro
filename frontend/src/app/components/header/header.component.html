@@ -4,18 +4,26 @@
   </a>
   <div class="menu">
     <nav>
+      <!--PUBLIC CONTENT-->
       <a [routerLink]="">Home</a>
       <a href="/biblioteca">Biblioteca</a>
       <a href="/servizi">Servizi</a>
       <a href="/contatti">Contatti</a>
       <div class="spacer"></div>
-      <span *ngIf="isLoggedIn">Ciao, {{username}} </span>
-      <button *ngIf="isLoggedIn" (click)="logout()">Logout</button>
-      <button *ngIf="!isLoggedIn" (click)="toggleLoginVisibility()">Login</button>
+      <!--LOGGED CONTENT-->
+      <div class="right-content" *ngIf="isLoggedIn">
+        <img alt="Avatar" [ngSrc]="this.avatar">
+        <span>Ciao, {{username}} </span>
+        <button (click)="logout()">Logout</button>
+      </div>
+      <!--NOT LOGGED CONTENT-->
+      <div class="right-content" *ngIf="!isLoggedIn">
+        <button (click)="toggleLoginVisibility()">Login</button>
+      </div>
     </nav>
   </div>
 
-  <div id="login-container" *ngIf="loginIsVisible">
+  <div class="box-container" *ngIf="loginIsVisible">
     <button (click)="toggleLoginVisibility()">
       <fa-icon [icon]="faClose"></fa-icon>
     </button>

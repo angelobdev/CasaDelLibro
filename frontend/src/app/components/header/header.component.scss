@@ -71,7 +71,7 @@ header .menu nav {
   flex-direction: row;
 }
 
-header .menu nav a, button {
+header .menu nav a, button, span {
   text-decoration: none;
   color: white;
   font-family: "Muli", sans-serif;
@@ -93,14 +93,14 @@ header .menu nav .spacer {
   margin-right: 20%;
 }
 
-#login-container {
+.box-container {
   background: white;
 
   position: absolute;
   top: 20vh;
 
   width: 30vw;
-  height: 50vh;
+  height: 65vh;
 
   border: 1px solid #0002;
   border-radius: 0.4rem;
@@ -113,7 +113,8 @@ header .menu nav .spacer {
   box-shadow: 0 0 10px #0002;
 }
 
-#login-container > button {
+
+.box-container > button {
   color: black;
   position: absolute;
   right: 0.4rem;
