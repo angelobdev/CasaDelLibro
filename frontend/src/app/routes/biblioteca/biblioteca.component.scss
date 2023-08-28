@@ -24,16 +24,25 @@
 
 .bookshelf .book {
   background: #ffffff;
+  min-height: 420px;
+
   margin: 0.4rem;
   padding: 0.6rem;
+
   border-radius: 0.6rem;
   border: 1px solid #0002;
   box-shadow: 0 2px 2px #0004;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .bookshelf .book .head {
   width: 100%;
   height: 160px;
+
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -43,19 +52,22 @@
 .bookshelf .book .head img {
   width: 30%;
   height: 100%;
+  object-fit: cover;
+  border-radius: 0.2rem;
 }
 
 .bookshelf .book .head .title {
   width: 50%;
   height: 100%;
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  justify-content: space-between;
+  align-items: flex-start;
   flex-direction: column;
 }
 
 .bookshelf .book .head .title h1, h3 {
   margin: 0;
+  padding: 0;
 }
 
 .bookshelf .book .head .right-bar {
@@ -67,8 +79,13 @@
   flex-direction: column;
 }
 
+.bookshelf .book .head .right-bar p {
+  padding: 0;
+  margin: 0;
+}
+
 .bookshelf .book .head .right-bar p:first-child {
-  background: red;
+  background: #E09F3E;
   color: white;
   width: 2rem;
   height: 2rem;
@@ -86,10 +103,12 @@
 }
 
 .bookshelf .book .info {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
+  margin-top: auto;
 }
 
 .bookshelf .book .info p {
@@ -97,6 +116,7 @@
 }
 
 .bookshelf .book .buttons {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -1,8 +1,4 @@
-DA IMPLEMENTARE:
-- Visualizzazione e Filtraggio catalogo dei libri
-- Possibilità di ordinare (spedizione) o prenotare (ritiro) libri
-- Dashboard amministrativa
-- Libri preferiti per gli utenti
-
-IMPLEMENTATE:
--
+- Carrello
+- Ordini (spedizione o ritiro, acquisto o noleggio)
+- Ricerca libri (header)
+- Gestione account

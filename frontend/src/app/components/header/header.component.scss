@@ -1,5 +1,6 @@
 @use "../../app.component" as app;
 @import url('https://fonts.googleapis.com/css?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
 
 header {
   width: 100vw;
@@ -39,10 +40,10 @@ header .logo:hover {
 }
 
 header .logo span {
-  font-family: "Lobster", sans-serif;
+  font-family: "Pacifico", sans-serif;
   font-size: 2rem;
-  color: #E09F3E;
-  text-shadow: 0 2px 2px #0004;
+  color: #393A10 ;
+  text-shadow: 0 2px #0004;
 }
 
 header .menu {
@@ -52,7 +53,7 @@ header .menu {
   width: 70%;
   height: 100%;
 
-  box-shadow: 0 2px 2px #0004;
+  box-shadow: 0 2px #0004;
 
   border-radius: 0.6rem;
 
@@ -62,10 +63,19 @@ header .menu {
   flex-direction: column;
 
   margin-right: 1rem;
+  padding-left: 1rem;
 }
 
 header .menu nav {
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+header .menu nav .left-content {
+  width: 30%;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -73,11 +83,32 @@ header .menu nav {
 }
 
 header .menu nav .right-content {
-  height: 100%;
+  width: 26%;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
   flex-direction: row;
+  margin-right: 1rem;
+}
+
+header .menu nav .right-content > button {
+  border-radius: 100%;
+  color: white;
+  transition: 0.4s;
+}
+
+header .menu nav .right-content > button:hover {
+  transform: scale(110%);
+  transition: 0.4s;
+}
+
+header .menu nav .right-content > button:active {
+  transform: scale(120%);
+  transition: 0.4s;
+}
+
+.dropdown button {
+  color: black;
 }
 
 .avatar {
@@ -87,7 +118,7 @@ header .menu nav .right-content {
   border-radius: 100%;
 }
 
-.logout{
+.logout {
   border-left: 2px solid white;
   margin-left: 0.4rem;
 }
@@ -114,7 +145,7 @@ header .menu nav .spacer {
   margin-right: 20%;
 }
 
-.box-container {
+.login-container {
   background: white;
 
   position: absolute;
@@ -135,7 +166,7 @@ header .menu nav .spacer {
 }
 
 
-.box-container > button {
+.close-button {
   color: black;
   position: absolute;
   right: 0.4rem;
@@ -145,4 +176,15 @@ header .menu nav .spacer {
 app-login {
   width: 90%;
   height: 90%;
+}
+
+.cart-container {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 30vw;
+  height: 100vh;
+  background: white;
+  padding: 0.4rem;
+  box-shadow: -2px 0 8px #0002;
 }

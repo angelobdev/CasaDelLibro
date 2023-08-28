@@ -1,32 +1,56 @@
 <header>
-  <a class="logo" href="/">
-    <span>La Casa del Libro</span>
-  </a>
-  <div class="menu">
-    <nav>
-      <!--PUBLIC CONTENT-->
-      <a routerLink="">Home</a>
-      <a routerLink="/biblioteca">Biblioteca</a>
-      <a routerLink="/azienda">Azienda</a>
-      <div class="spacer"></div>
-      <!--LOGGED CONTENT-->
-      <div class="right-content" *ngIf="isLoggedIn">
-        <img class="avatar" alt="Avatar" [src]="this.avatar">
-        <span>Ciao, {{username}} </span>
-        <button (click)="logout()" class="logout">Esci</button>
-      </div>
-      <!--NOT LOGGED CONTENT-->
-      <div class="right-content" *ngIf="!isLoggedIn">
-        <button (click)="toggleLoginVisibility()">Login</button>
-      </div>
-    </nav>
-  </div>
+    <a class="logo" href="/">
+        <span>La Casa del Libro</span>
+    </a>
 
-  <div class="box-container" *ngIf="loginIsVisible">
-    <button (click)="toggleLoginVisibility()">
-      <fa-icon [icon]="faClose"></fa-icon>
-    </button>
-    <app-login></app-login>
-  </div>
+    <div class="menu">
+        <nav>
+            <!--PUBLIC CONTENT-->
+            <div class="left-content">
+                <a routerLink="">Home</a>
+                <a routerLink="/biblioteca">Biblioteca</a>
+                <a routerLink="/azienda">Azienda</a>
+            </div>
+            <!--LOGGED CONTENT-->
+            <div class="right-content" *ngIf="isLoggedIn">
+                <img class="avatar" alt="Avatar" [src]="this.avatar">
+                <span>Ciao, {{username}} </span>
+                <button (click)="toggleCartVisibility()">
+                    <fa-icon [icon]="faCart"></fa-icon>
+                </button>
+                <button [matMenuTriggerFor]="menu">
+                    <fa-icon [icon]="faBars"></fa-icon>
+                </button>
+                <mat-menu #menu="matMenu" backdropClass="dropdown">
+                    <a routerLink="account" mat-menu-item>Account</a>
+                    <a mat-menu-item style="color: red" (click)="logout()">Esci</a>
+                </mat-menu>
+            </div>
+            <!--NOT LOGGED CONTENT-->
+            <div class="right-content" *ngIf="!isLoggedIn">
+                <div class="spacer"></div>
+                <button (click)="toggleLoginVisibility()">Login</button>
+            </div>
+        </nav>
+    </div>
+
+
+    <!--Container Login-->
+    <div class="login-container" *ngIf="loginIsVisible">
+        <button (click)="toggleLoginVisibility()" class="close-button">
+            <fa-icon [icon]="faClose"></fa-icon>
+        </button>
+        <app-login></app-login>
+    </div>
+
+    <!--Container Carrello-->
+    <div class="cart-container" *ngIf="cartIsVisible" @onOff>
+        <button (click)="toggleCartVisibility()" class="close-button">
+            <fa-icon [icon]="faClose"></fa-icon>
+        </button>
+        <h1>Carrello</h1>
+    </div>
 
 </header>
+
+

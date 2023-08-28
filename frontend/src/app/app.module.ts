@@ -17,39 +17,42 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import {NgOptimizedImage} from "@angular/common";
 import {HttpRequestInterceptor} from "./helpers/http.interceptor";
-import { AziendaComponent } from './routes/azienda/azienda.component';
-
+import {AziendaComponent} from './routes/azienda/azienda.component';
+import {MatMenuModule} from '@angular/material/menu';
+import { AccountComponent } from './routes/account/account.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    BibliotecaComponent,
-    HomeComponent,
-    LoginComponent,
-    AziendaComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    FontAwesomeModule,
-    BrowserAnimationsModule,
-    MatDialogModule,
-    MatButtonModule,
-    MatInputModule,
-    NgOptimizedImage,
-  ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HttpRequestInterceptor,
-      multi: true
-    }
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        FooterComponent,
+        BibliotecaComponent,
+        HomeComponent,
+        LoginComponent,
+        AziendaComponent,
+        AccountComponent,
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        HttpClientModule,
+        FontAwesomeModule,
+        BrowserAnimationsModule,
+        MatDialogModule,
+        MatButtonModule,
+        MatInputModule,
+        NgOptimizedImage,
+        MatMenuModule,
+    ],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: HttpRequestInterceptor,
+            multi: true
+        }
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }

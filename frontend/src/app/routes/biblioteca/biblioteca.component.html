@@ -1,11 +1,11 @@
 <div class="biblioteca">
-    <h1>I nostri libri...</h1>
+    <!--    <h1>I nostri libri...</h1>-->
     <div class="bookshelf">
         <div class="book" *ngFor="let libro of listaLibri">
             <div class="head">
-                <img [src]="libro.copertina">
+                <img alt="{{libro.titolo}}" [src]="libro.copertina">
                 <div class="title">
-                    <h1>{{libro.titolo}}</h1>
+                    <h2>{{libro.titolo}}</h2>
                     <h3>di {{libro.autore}}</h3>
                 </div>
                 <div class="right-bar">
@@ -24,7 +24,7 @@
                 <button>Acquista</button>
                 <button>Noleggia</button>
             </div>
-            <p>ISBN: {{libro.id + 9862738162734}}</p>
+            <p>ISBN: {{libro.id + 9788800000000}}</p>
         </div>
     </div>
 </div>
