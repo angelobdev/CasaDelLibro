@@ -33,4 +33,10 @@ public class Libro {
 
     @Column(name = "quantita")
     private Integer quantita;
+
+    @Column(name = "copertina")
+    private String copertina;
+
+    @Column(name = "prezzo")
+    private Double prezzo;
 }

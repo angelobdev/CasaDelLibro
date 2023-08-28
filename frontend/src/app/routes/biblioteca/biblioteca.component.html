@@ -1,1 +1,30 @@
-<p>biblioteca works!</p>
+<div class="biblioteca">
+    <h1>I nostri libri...</h1>
+    <div class="bookshelf">
+        <div class="book" *ngFor="let libro of listaLibri">
+            <div class="head">
+                <img [src]="libro.copertina">
+                <div class="title">
+                    <h1>{{libro.titolo}}</h1>
+                    <h3>di {{libro.autore}}</h3>
+                </div>
+                <div class="right-bar">
+                    <p>{{libro.etaMinima}}+</p>
+                    <p>{{libro.numeroPagine}}p</p>
+                </div>
+            </div>
+            <div class="description">
+                <p>{{libro.descrizione}}</p>
+            </div>
+            <div class="info">
+                <p>{{libro.prezzo.toFixed(2)}}€</p>
+                <p>{{libro.quantita}} in stock</p>
+            </div>
+            <div class="buttons">
+                <button>Acquista</button>
+                <button>Noleggia</button>
+            </div>
+            <p>ISBN: {{libro.id + 9862738162734}}</p>
+        </div>
+    </div>
+</div>

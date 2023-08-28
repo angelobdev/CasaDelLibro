@@ -1,3 +1,4 @@
+@use "../../app.component" as app;
 @import url('https://fonts.googleapis.com/css?family=Lobster&display=swap');
 
 header {
@@ -24,8 +25,8 @@ header .logo {
   margin-right: auto;
 
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: flex-start;
   flex-direction: row;
 
   text-decoration: none;
@@ -40,18 +41,18 @@ header .logo:hover {
 header .logo span {
   font-family: "Lobster", sans-serif;
   font-size: 2rem;
-  color: #fff;
-  text-shadow: 0 0 4px #6e046c;
+  color: #E09F3E;
+  text-shadow: 0 2px 2px #0004;
 }
 
 header .menu {
 
-  background: linear-gradient(to bottom right, #ff5900, #ff9900);
+  background: #E09F3E;
 
   width: 70%;
   height: 100%;
 
-  box-shadow: 0 0 10px 4px #0002;
+  box-shadow: 0 2px 2px #0004;
 
   border-radius: 0.6rem;
 
@@ -80,7 +81,7 @@ header .menu nav .right-content {
 }
 
 .avatar {
-  height: 2rem;
+  height: 1.8rem;
   object-fit: cover;
   margin-right: 0.4rem;
   border-radius: 100%;
@@ -130,7 +131,7 @@ header .menu nav .spacer {
   justify-content: center;
   flex-direction: column;
 
-  box-shadow: 0 0 10px #0002;
+  box-shadow: 0 0 40px #0008;
 }
 
 

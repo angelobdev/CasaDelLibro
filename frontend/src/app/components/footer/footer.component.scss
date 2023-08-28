@@ -4,10 +4,6 @@ footer {
   width: 100vw;
   height: 2rem;
 
-  position: absolute;
-  bottom: 0;
-  left: 0;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -22,11 +18,13 @@ footer .social-icons {
 footer .social-icons a {
   margin-right: 0.4rem;
   color: #fffc;
+  transition: 0.4s;
 }
 
 footer .social-icons a:hover{
   color: #fffa;
   cursor: pointer;
+  transition: 0.4s;
 }
 
 footer .credits {
@@ -40,9 +38,11 @@ footer .credits span {
 footer .credits span a {
   color: #fffc;
   text-decoration: none;
+  transition: 0.4s;
 }
 
 footer .credits span a:hover {
-  color: #fffa
+  color: #fffa;
+  transition: 0.4s;
 }
 

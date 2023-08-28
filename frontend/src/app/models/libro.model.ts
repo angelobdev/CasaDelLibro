@@ -1,8 +1,10 @@
 export interface Libro {
-  id: number,
-  descrizione: string,
-  autore: string,
-  numeroPagine: number,
-  etaMinima: number,
-  quantita: number,
+    id: number,
+    descrizione: string,
+    autore: string,
+    numeroPagine: number,
+    etaMinima: number,
+    quantita: number,
+    copertina: string,
+    prezzo: number,
 }

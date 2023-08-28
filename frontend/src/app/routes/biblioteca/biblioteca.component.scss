@@ -1,0 +1,145 @@
+.biblioteca {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.biblioteca > h1 {
+  margin-top: 1rem;
+  font-size: 3rem;
+  font-family: "Lobster", sans-serif;
+  color: white;
+  text-shadow: 0 2px 2px #0006;
+}
+
+.bookshelf {
+  width: 98vw;
+  display: inline-grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 1rem;
+}
+
+.bookshelf .book {
+  background: #ffffff;
+  margin: 0.4rem;
+  padding: 0.6rem;
+  border-radius: 0.6rem;
+  border: 1px solid #0002;
+  box-shadow: 0 2px 2px #0004;
+}
+
+.bookshelf .book .head {
+  width: 100%;
+  height: 160px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: row;
+}
+
+.bookshelf .book .head img {
+  width: 30%;
+  height: 100%;
+}
+
+.bookshelf .book .head .title {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+
+.bookshelf .book .head .title h1, h3 {
+  margin: 0;
+}
+
+.bookshelf .book .head .right-bar {
+  width: 10%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.bookshelf .book .head .right-bar p:first-child {
+  background: red;
+  color: white;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid #0002;
+}
+
+.bookshelf .book .description {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.bookshelf .book .info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+
+.bookshelf .book .info p {
+  font-size: 1.2rem;
+}
+
+.bookshelf .book .buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  margin-top: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.bookshelf .book .buttons button {
+  width: 6rem;
+  height: 3rem;
+  color: white;
+  border: none;
+  border-radius: 0.6rem;
+  transition: 0.2s;
+  box-shadow: 0 2px 2px #0002;
+}
+
+.bookshelf .book .buttons button:hover {
+  transition: 0.2s;
+  transform: scale(102%);
+}
+
+.bookshelf .book .buttons button:first-child {
+  background: #68b63d;
+}
+
+.bookshelf .book .buttons button:first-child:hover {
+  background: #7fb262;
+}
+
+.bookshelf .book .buttons button:first-child:active {
+  background: #90ad81;
+}
+
+.bookshelf .book .buttons button:last-child {
+  background: #35c5aa;
+}
+
+.bookshelf .book .buttons button:last-child:hover {
+  background: #65c2b0;
+}
+
+.bookshelf .book .buttons button:last-child:active {
+  background: #96ccc2;
+}
