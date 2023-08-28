@@ -44,17 +44,17 @@ CREATE TABLE IF NOT EXISTS utenti
 -- Libri
 CREATE TABLE IF NOT EXISTS libri
 (
-    id            SERIAL       NOT NULL,
+    id            SERIAL           NOT NULL,
 
     -- Informazioni libro
-    titolo        VARCHAR(64)  NOT NULL,
-    descrizione   VARCHAR(255) NOT NULL,
-    autore        VARCHAR(64)  NOT NULL,
-    numero_pagine INTEGER      NOT NULL,
-    eta_minima    INTEGER      NOT NULL,
-
-    -- Informazioni stoccaggio
-    quantita      INTEGER      NOT NULL,
+    titolo        VARCHAR(64)      NOT NULL,
+    descrizione   VARCHAR(255)     NOT NULL,
+    autore        VARCHAR(64)      NOT NULL,
+    numero_pagine INTEGER          NOT NULL,
+    eta_minima    INTEGER          NOT NULL,
+    quantita      INTEGER          NOT NULL,
+    copertina     VARCHAR(255)     NOT NULL DEFAULT 'https://blog.springshare.com/wp-content/uploads/2010/02/nc-md.gif',
+    prezzo        DOUBLE PRECISION NOT NULL DEFAULT 0.0,
 
     PRIMARY KEY (id)
 );
