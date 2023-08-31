@@ -1,4 +1,0 @@
-- Carrello
-- Ordini (spedizione o ritiro, acquisto o noleggio)
-- Ricerca libri (header)
-- Gestione account
