@@ -1,35 +1,26 @@
 import {Injectable} from '@angular/core';
-
-const USER_KEY = 'auth-user';
+import {JwtResponse} from "../payload/response/jwt.response";
 
 @Injectable({
     providedIn: 'root'
 })
 export class StorageService {
-    constructor() {
+
+    JWT_KEY = 'auth-token';
+
+    public saveJWToken(jwt: JwtResponse): void {
+        window.sessionStorage.removeItem(this.JWT_KEY);
+        window.sessionStorage.setItem(this.JWT_KEY, JSON.stringify(jwt));
     }
 
-    clean(): void {
-        window.sessionStorage.clear();
-    }
-
-    public salvaUtente(user: any): void {
-        window.sessionStorage.removeItem(USER_KEY);
-        window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
-    }
-
-    public getUtente(): any {
-        const user = window.sessionStorage.getItem(USER_KEY);
-
-        if (user) {
-            return JSON.parse(user);
-        }
+    public getJWToken(): JwtResponse | null {
+        const jwtString = window.sessionStorage.getItem(this.JWT_KEY);
+        if (jwtString)
+            return JSON.parse(jwtString) as JwtResponse;
         return null;
     }
 
-    public isLoggedIn(): boolean {
-        const user = window.sessionStorage.getItem(USER_KEY);
-        return !!user;
-
+    public clean(): void {
+        window.sessionStorage.clear();
     }
 }

@@ -18,7 +18,7 @@ export class CarrelloService {
     };
 
     constructor(private http: HttpClient, private storageService: StorageService) {
-        let utenteID = storageService.getUtente()!.id;
+        let utenteID = storageService.getJWToken()!.id;
 
         // Cerco un carrello già esistente
         this.http.get(this.URL + "/get/" + utenteID, this.httpOptions).subscribe({
