@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;
-      this.roles = this.storageService.getUser().roles;
+      this.roles = this.storageService.getUtente().roles;
     }
   }
 
@@ -49,11 +49,11 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(data).subscribe({
       next: data => {
-        this.storageService.saveUser(data);
+        this.storageService.salvaUtente(data);
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        this.roles = this.storageService.getUser().roles;
+        this.roles = this.storageService.getUtente().roles;
         this.reloadPage();
       },
       error: err => {
@@ -78,11 +78,11 @@ export class LoginComponent implements OnInit {
 
     this.authService.register(data).subscribe({
       next: data => {
-        this.storageService.saveUser(data);
+        this.storageService.salvaUtente(data);
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        this.roles = this.storageService.getUser().roles;
+        this.roles = this.storageService.getUtente().roles;
         this.reloadPage();
       },
       error: err => {

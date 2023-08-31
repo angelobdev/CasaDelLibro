@@ -16,6 +16,7 @@ spring:
               dialect: PostgreSQLDialect
         # Hibernate ddl auto (create, create-drop, validate, update)
         ddl-auto: update
+        default_schema: public
 
 # App Properties
 com:

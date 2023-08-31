@@ -1,0 +1,142 @@
+.carrello {
+  width: 100%;
+  height: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+
+.carrello .libri {
+  width: 100%;
+  height: calc(100% - 6rem);
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+
+  overflow-y: scroll;
+}
+
+.carrello .libri ul {
+  width: 90%;
+  height: 100%;
+
+  list-style: none;
+  padding: 0;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+
+.carrello .libri ul li {
+  width: 100%;
+  background: #E09F3E;
+  color: white;
+
+  margin-top: 1rem;
+  padding: 1rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+
+  border-radius: 0.6rem;
+  border: none;
+
+  box-shadow: 0 2px 2px #0004;
+}
+
+.carrello .libri ul li span:first-child {
+  width: 70%;
+}
+
+.carrello .libri ul li button {
+  color: white;
+  width: 1.6rem;
+  height: 1.6rem;
+  background: #de2b2b;
+  border-radius: 0.4rem;
+  border: none;
+  transition: 0.4s;
+}
+
+.carrello .libri ul li button:hover {
+  background: #de4343;
+  transition: 0.4s;
+  transform: scale(102%);
+  cursor: pointer;
+}
+
+.carrello .libri ul li button:active {
+  background: #d96565;
+  transition: 0.4s;
+}
+
+.carrello .info {
+  width: 100%;
+  height: 3rem;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+}
+
+.carrello .info p {
+  font-size: 1.4rem;
+}
+
+.carrello .buttons {
+  width: 100%;
+  height: 3rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+
+.carrello .buttons button {
+  width: 40%;
+  height: 100%;
+
+  color: white;
+  border: none;
+  border-radius: 0.6rem;
+  transition: 0.2s;
+  box-shadow: 0 2px 2px #0002;
+}
+
+.carrello .buttons button:hover {
+  transition: 0.2s;
+  transform: scale(102%);
+}
+
+.carrello .buttons button:first-child {
+  background: #68b63d;
+}
+
+.carrello .buttons button:first-child:hover {
+  background: #7fb262;
+}
+
+.carrello .buttons button:first-child:active {
+  background: #90ad81;
+}
+
+.carrello .buttons button:last-child {
+  background: #35c5aa;
+}
+
+.carrello .buttons button:last-child:hover {
+  background: #65c2b0;
+}
+
+.carrello .buttons button:last-child:active {
+  background: #96ccc2;
+}

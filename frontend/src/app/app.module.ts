@@ -20,6 +20,7 @@ import {HttpRequestInterceptor} from "./helpers/http.interceptor";
 import {AziendaComponent} from './routes/azienda/azienda.component';
 import {MatMenuModule} from '@angular/material/menu';
 import { AccountComponent } from './routes/account/account.component';
+import { CarrelloComponent } from './components/carrello/carrello.component';
 
 @NgModule({
     declarations: [
@@ -31,6 +32,7 @@ import { AccountComponent } from './routes/account/account.component';
         LoginComponent,
         AziendaComponent,
         AccountComponent,
+        CarrelloComponent,
     ],
     imports: [
         BrowserModule,

@@ -11,7 +11,7 @@ import lombok.Setter;
 public class Libro {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "libri_id_seq")
     @SequenceGenerator(name = "libri_id_seq", allocationSize = 1)
     @Column(name = "id")
     private Integer id;

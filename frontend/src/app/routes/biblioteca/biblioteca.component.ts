@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {LibroService} from "../../services/libro.service";
+import {Carrello} from "../../models/carrello.model";
+import {Libro} from "../../models/libro.model";
+import {CarrelloService} from "../../services/carrello.service";
 
 @Component({
     selector: 'app-biblioteca',
@@ -8,15 +11,26 @@ import {LibroService} from "../../services/libro.service";
 })
 export class BibliotecaComponent implements OnInit {
 
-    listaLibri: any;
+    listaLibri: Array<Libro> | null = null;
+    carrello: Carrello | null = null;
 
-    constructor(private libriService: LibroService) {
+    constructor(private libroService: LibroService, private carrelloService: CarrelloService) {
     }
 
     ngOnInit(): void {
-        this.libriService.getAllLibri().subscribe({
+
+        this.libroService.getAllLibri().subscribe({
             next: data => {
-                this.listaLibri = data;
+                this.listaLibri = data as Array<Libro>;
+            },
+            error: err => {
+                console.log(err);
+            }
+        });
+
+        this.carrelloService.getUpdate().subscribe({
+            next: data => {
+                this.carrello = data;
             },
             error: err => {
                 console.log(err);
@@ -24,6 +38,8 @@ export class BibliotecaComponent implements OnInit {
         })
     }
 
+    aggiungiLibroAlCarrello(libroID: number) {
+        this.carrelloService.aggiungiLibro(libroID);
+    }
 
-    protected readonly LibroService = LibroService;
 }

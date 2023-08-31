@@ -1,30 +1,30 @@
 <div class="biblioteca">
-    <!--    <h1>I nostri libri...</h1>-->
-    <div class="bookshelf">
-        <div class="book" *ngFor="let libro of listaLibri">
-            <div class="head">
-                <img alt="{{libro.titolo}}" [src]="libro.copertina">
-                <div class="title">
-                    <h2>{{libro.titolo}}</h2>
-                    <h3>di {{libro.autore}}</h3>
-                </div>
-                <div class="right-bar">
-                    <p>{{libro.etaMinima}}+</p>
-                    <p>{{libro.numeroPagine}}p</p>
-                </div>
-            </div>
-            <div class="description">
-                <p>{{libro.descrizione}}</p>
-            </div>
-            <div class="info">
-                <p>{{libro.prezzo.toFixed(2)}}€</p>
-                <p>{{libro.quantita}} in stock</p>
-            </div>
-            <div class="buttons">
-                <button>Acquista</button>
-                <button>Noleggia</button>
-            </div>
-            <p>ISBN: {{libro.id + 9788800000000}}</p>
+  <!--    <h1>I nostri libri...</h1>-->
+  <div class="bookshelf">
+    <div class="book" *ngFor="let libro of listaLibri">
+      <div class="head">
+        <img alt="{{libro.titolo}}" [src]="libro.copertina">
+        <div class="title">
+          <h2>{{libro.titolo}}</h2>
+          <h3>di {{libro.autore}}</h3>
         </div>
+        <div class="right-bar">
+          <p>{{libro.etaMinima}}+</p>
+          <p>{{libro.numeroPagine}}p</p>
+        </div>
+      </div>
+      <div class="description">
+        <p>{{libro.descrizione}}</p>
+      </div>
+      <div class="info">
+        <p>{{libro.prezzo.toFixed(2)}}€</p>
+        <p>{{libro.quantita}} in stock</p>
+      </div>
+      <div class="buttons">
+        <button (click)="aggiungiLibroAlCarrello(libro.id)">Acquista</button>
+        <button>Noleggia</button>
+      </div>
+      <p>ISBN: {{libro.id + 9788800000000}}</p>
     </div>
+  </div>
 </div>

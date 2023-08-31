@@ -14,7 +14,7 @@ import java.util.List;
 public class Carrello {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "carrelli_id_seq")
     @SequenceGenerator(name = "carrelli_id_seq", allocationSize = 1)
     @Column(name = "id")
     private Integer id;

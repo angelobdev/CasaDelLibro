@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { EventBusService } from './event-bus.service';
+import { CarrelloService } from './carrello.service';
 
-describe('EventBusService', () => {
-  let service: EventBusService;
+describe('OrdineService', () => {
+  let service: CarrelloService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(EventBusService);
+    service = TestBed.inject(CarrelloService);
   });
 
   it('should be created', () => {

@@ -5,32 +5,33 @@ import {LoginRequest} from "../payload/requests/login.request";
 import {RegisterRequest} from "../payload/requests/register.request";
 import {StorageService} from "./storage.service";
 
-const AUTH_API = 'http://localhost:8080/api/auth/'; // TODO: dotenv
-
-const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
-};
-
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+
+  URL = 'http://localhost:8080/api/auth/';
+
+  httpOptions = {
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
+  };
+
   constructor(private http: HttpClient, private storage: StorageService) {
   }
 
   login(data: LoginRequest): Observable<any> {
     return this.http.post(
-      AUTH_API + 'login',
+      this.URL + 'login',
       data,
-      httpOptions
+      this.httpOptions
     );
   }
 
   register(data: RegisterRequest): Observable<any> {
     return this.http.post(
-      AUTH_API + 'register',
+      this.URL + 'register',
       data,
-      httpOptions
+      this.httpOptions
     );
   }
 

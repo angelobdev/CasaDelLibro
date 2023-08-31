@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,6 +17,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+
 
 public class AuthTokenFilter extends OncePerRequestFilter {
 
@@ -28,21 +30,45 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     private static final Logger logger = LoggerFactory.getLogger(AuthTokenFilter.class);
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+    protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain)
             throws ServletException, IOException {
 
         try {
-            String jwt = parseJwt(request);
+            // Parsing JWT Token
+            String jwt = null;
+
+            String headerAuth = request.getHeader("Authorization");
+            if (StringUtils.hasText(headerAuth) && headerAuth.startsWith("Bearer ")) {
+                jwt = headerAuth.substring(7);
+            }
+
+            logger.warn("Richiesta presso: " + request.getRequestURL());
+
             if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
+
                 String username = jwtUtils.getUserNameFromJwtToken(jwt);
 
                 UserDetails userDetails = utentiService.loadUserByUsername(username);
-                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null,
-                        userDetails.getAuthorities());
-                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                UsernamePasswordAuthenticationToken authentication =
+                        new UsernamePasswordAuthenticationToken(
+                                userDetails,
+                                null,
+                                userDetails.getAuthorities()
+                        );
+
+                authentication
+                        .setDetails(new WebAuthenticationDetailsSource()
+                                .buildDetails(request));
+
+                logger.warn(username + " è stato autenticato!");
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            } else {
+                logger.warn("Token di accesso non valido!");
             }
+
+
         } catch (Exception e) {
             logger.error("Cannot set user authentication: " + e.getMessage());
         }
@@ -50,13 +76,4 @@ public class AuthTokenFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    private String parseJwt(HttpServletRequest request) {
-        String headerAuth = request.getHeader("Authorization");
-
-        if (StringUtils.hasText(headerAuth) && headerAuth.startsWith("Bearer ")) {
-            return headerAuth.substring(7);
-        }
-
-        return null;
-    }
 }
