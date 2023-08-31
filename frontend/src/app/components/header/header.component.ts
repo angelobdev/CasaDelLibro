@@ -47,9 +47,9 @@ export class HeaderComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        if (this.storageService.isLoggedIn()) {
+        if (this.authService.isLoggedIn()) {
             this.isLoggedIn = true;
-            this.username = this.storageService.getUtente()?.username;
+            this.username = this.storageService.getJWToken()!.username;
             this.utenteService.getAvatar(this.username!).subscribe({
                 next: data => {
                     this.avatar = data.message;

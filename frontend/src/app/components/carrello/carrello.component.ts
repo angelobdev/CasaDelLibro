@@ -22,7 +22,7 @@ export class CarrelloComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.utenteID = this.storageService.getUtente().id;
+        this.utenteID = this.storageService.getJWToken()!.id;
         this.carrelloService.getUpdate().subscribe({
             next: data => {
                 this.carrello = data;
