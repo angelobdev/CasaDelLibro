@@ -1,5 +1,6 @@
 package com.angelobdev.casadellibro.model;
 
+import com.angelobdev.casadellibro.model.support.CarrelloLibro;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,9 +33,14 @@ public class Carrello {
     @JoinColumn(name = "utente_id")
     private Utente utente;
 
-    @OneToMany
-    @JoinTable(name = "carrelli_libri",
-            joinColumns = @JoinColumn(name = "carrello_id"),
-            inverseJoinColumns = @JoinColumn(name = "libro_id"))
-    private List<Libro> libri;
+//    @OneToMany
+//    @JoinTable(name = "carrelli_libri",
+//            joinColumns = @JoinColumn(name = "carrello_id"),
+//            inverseJoinColumns = @JoinColumn(name = "libro_id"))
+//    private List<Libro> libri;
+
+    @OneToMany(mappedBy = "carrello")
+    private List<CarrelloLibro> libri;
+
+
 }

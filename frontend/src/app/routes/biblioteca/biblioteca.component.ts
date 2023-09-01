@@ -39,7 +39,7 @@ export class BibliotecaComponent implements OnInit {
     }
 
     aggiungiLibroAlCarrello(libroID: number) {
-        this.carrelloService.aggiungiLibro(libroID);
+        this.carrelloService.aggiungiLibro(libroID, 1);
     }
 
 }

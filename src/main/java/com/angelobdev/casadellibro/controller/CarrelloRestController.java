@@ -19,9 +19,9 @@ public class CarrelloRestController {
         return ResponseEntity.ok(carrelliService.createCarrello(utenteID));
     }
 
-    @PostMapping("/aggiungi/{carrelloID}/{libroID}")
-    public ResponseEntity<?> aggiungi(@PathVariable Integer carrelloID, @PathVariable Integer libroID) {
-        return ResponseEntity.ok(carrelliService.aggiungiLibro(carrelloID, libroID));
+    @PostMapping("/aggiungi/{carrelloID}/{libroID}/{quantita}")
+    public ResponseEntity<?> aggiungi(@PathVariable Integer carrelloID, @PathVariable Integer libroID, @PathVariable Integer quantita) {
+        return ResponseEntity.ok(carrelliService.aggiungiLibro(carrelloID, libroID, quantita));
     }
 
     @PostMapping("/rimuovi/{carrelloID}/{libroID}")

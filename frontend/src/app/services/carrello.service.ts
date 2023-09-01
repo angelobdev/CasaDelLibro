@@ -60,8 +60,8 @@ export class CarrelloService {
 
     // METODI
 
-    aggiungiLibro(libroID: number) {
-        this.http.post(this.URL + "/aggiungi/" + this.carrello.getValue()?.id + "/" + libroID, {}, this.httpOptions).subscribe({
+    aggiungiLibro(libroID: number, quantita: number) {
+        this.http.post(this.URL + "/aggiungi/" + this.carrello.getValue()?.id + "/" + libroID + "/" + quantita, {}, this.httpOptions).subscribe({
             next: data => {
                 this.sendUpdate(data as Carrello);
             },

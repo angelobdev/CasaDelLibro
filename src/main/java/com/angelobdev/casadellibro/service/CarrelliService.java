@@ -1,7 +1,10 @@
 package com.angelobdev.casadellibro.service;
 
 import com.angelobdev.casadellibro.model.*;
+import com.angelobdev.casadellibro.model.support.CarrelloLibro;
 import com.angelobdev.casadellibro.repository.*;
+import com.angelobdev.casadellibro.repository.support.CarrelliLibriRepository;
+import com.angelobdev.casadellibro.service.support.CarrelliLibriService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,13 +16,16 @@ import java.util.List;
 public class CarrelliService {
 
     @Autowired
-    private CarrelliRepository carrelliRepository;
-
-    @Autowired
     private UtentiRepository utentiRepository;
 
     @Autowired
+    private CarrelliRepository carrelliRepository;
+
+    @Autowired
     private LibriRepository libriRepository;
+
+    @Autowired
+    private CarrelliLibriService carrelliLibriService;
 
     @Autowired
     private OrdiniRepository ordiniRepository;
@@ -29,6 +35,8 @@ public class CarrelliService {
 
     @Autowired
     private RitiriRepository ritiriRepository;
+    @Autowired
+    private CarrelliLibriRepository carrelliLibriRepository;
 
     public Carrello createCarrello(Integer utenteID) {
         Carrello carrello = new Carrello();
@@ -45,38 +53,57 @@ public class CarrelliService {
         return carrelliRepository.save(carrello);
     }
 
-    public Carrello aggiungiLibro(Integer carrelloID, Integer libroID) {
-        Libro libro = libriRepository.findById(libroID).orElse(null);
-        assert libro != null;
+    public Carrello aggiungiLibro(Integer carrelloID, Integer libroID, Integer quantitaDaAggiungere) {
 
-        Carrello carrello = carrelliRepository.findById(carrelloID).orElse(null);
-        assert carrello != null;
+        CarrelloLibro carrelloLibro = carrelliLibriRepository.findByCarrelloIdAndLibroId(carrelloID, libroID).orElse(null);
 
-        carrelliRepository.aggiungiLibro(carrelloID, libroID);
+        // Se il libro è gia presente
+        Carrello carrello;
+        Libro libro;
 
-        double importo = carrello.getImporto() + libro.getPrezzo();
-        carrello.setImporto(importo);
+
+        if (carrelloLibro != null) {
+            // Libro già presente nel carrello
+            carrello = carrelloLibro.getCarrello();
+            libro = carrelloLibro.getLibro();
+        } else {
+
+            // Libro non ancora presente nel carrello
+            carrello = carrelliRepository.findById(carrelloID).orElse(null);
+            libro = libriRepository.findById(libroID).orElse(null);
+
+
+        }
+
+        // Aggiungo al carrello
+        carrelliLibriService.aggiungiLibro(carrelloID, libroID, quantitaDaAggiungere);
+
+        // Aggiorno importo
+        assert carrello != null && libro != null;
+        double nuovoImporto = carrello.getImporto() + (libro.getPrezzo() * quantitaDaAggiungere);
+        carrello.setImporto(nuovoImporto);
 
         return carrelliRepository.save(carrello);
     }
 
     public Carrello rimuoviLibro(Integer carrelloID, Integer libroID) {
-        Libro libro = libriRepository.findById(libroID).orElse(null);
-        assert libro != null;
+        CarrelloLibro carrelloLibro = carrelliLibriRepository.findByCarrelloIdAndLibroId(carrelloID, libroID).orElse(null);
+        assert carrelloLibro != null;
 
-        Carrello carrello = carrelliRepository.findById(carrelloID).orElse(null);
-        assert carrello != null;
+        Carrello carrello = carrelloLibro.getCarrello();
+        Libro libro = carrelloLibro.getLibro();
+        Integer quantita = carrelloLibro.getQuantita();
 
-        carrelliRepository.rimuoviLibro(carrelloID, libroID);
-
-        double importo = carrello.getImporto() - libro.getPrezzo();
+        double importo = carrello.getImporto() - (libro.getPrezzo() * quantita);
         carrello.setImporto(importo);
+
+        carrelliLibriService.rimuoviLibro(carrelloID, libroID);
 
         return carrelliRepository.save(carrello);
     }
 
     public Carrello svuotaCarrello(Integer carrelloID) {
-        carrelliRepository.svuotaCarrello(carrelloID);
+        carrelliLibriService.svuotaCarrello(carrelloID);
 
         Carrello carrello = carrelliRepository.findById(carrelloID).orElse(null);
         assert carrello != null;

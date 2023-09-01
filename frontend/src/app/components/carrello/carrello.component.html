@@ -1,32 +1,32 @@
 <h1>Carrello</h1>
 
 <div class="carrello" *ngIf="!carrello">
-    <p>Nessun carrello presente!</p>
+  <p>Nessun carrello presente!</p>
 </div>
 
 <div class="carrello" *ngIf="carrello">
 
-    <!--Scroll dei libri-->
-    <div class="libri">
-        <p *ngIf="carrello.libri.length == 0">Nessun libro nel carrello</p>
-        <ul>
-            <li *ngFor="let libro of carrello.libri">
-                <span>{{libro.titolo}}</span>
-                <span>{{libro.prezzo}}€</span>
-                <span>{{libro.quantita}}pz</span> <!-- TODO: fix -->
-                <button (click)="rimuoviLibro(libro.id)">
-                    <fa-icon [icon]="faRemove"></fa-icon>
-                </button>
-            </li>
-        </ul>
-    </div>
+  <!--Scroll dei libri-->
+  <div class="libri">
+    <p *ngIf="carrello.libri.length == 0">Nessun libro nel carrello</p>
+    <ul>
+      <li *ngFor="let carrelloLibro of carrello.libri">
+        <span>{{carrelloLibro.libro.titolo}}</span>
+        <span>{{carrelloLibro.libro.prezzo}}€</span>
+        <span>{{carrelloLibro.quantita}}pz</span>
+        <button (click)="rimuoviLibro(carrelloLibro.libro.id)">
+          <fa-icon [icon]="faRemove"></fa-icon>
+        </button>
+      </li>
+    </ul>
+  </div>
 
-    <div class="info">
-        <p>Totale: {{carrello.importo.toFixed(2)}}€</p>
-    </div>
+  <div class="info">
+    <p>Totale: {{carrello.importo.toFixed(2)}}€</p>
+  </div>
 
-    <div class="buttons">
-        <button (click)="acquistaCarrello()">Acquista</button>
-        <button (click)="svuotaCarrello()">Svuota</button>
-    </div>
+  <div class="buttons">
+    <button (click)="acquistaCarrello()">Acquista</button>
+    <button (click)="svuotaCarrello()">Svuota</button>
+  </div>
 </div>
