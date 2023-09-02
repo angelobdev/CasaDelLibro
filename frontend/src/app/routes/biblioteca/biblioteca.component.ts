@@ -3,43 +3,48 @@ import {LibroService} from "../../services/libro.service";
 import {Carrello} from "../../models/carrello.model";
 import {Libro} from "../../models/libro.model";
 import {CarrelloService} from "../../services/carrello.service";
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-    selector: 'app-biblioteca',
-    templateUrl: './biblioteca.component.html',
-    styleUrls: ['./biblioteca.component.scss']
+  selector: 'app-biblioteca',
+  templateUrl: './biblioteca.component.html',
+  styleUrls: ['./biblioteca.component.scss']
 })
 export class BibliotecaComponent implements OnInit {
 
-    listaLibri: Array<Libro> | null = null;
-    carrello: Carrello | null = null;
+  listaLibri: Array<Libro> | null = null;
+  carrello: Carrello | null = null;
 
-    constructor(private libroService: LibroService, private carrelloService: CarrelloService) {
-    }
+  // Icone
+  faSearch = faSearch;
 
-    ngOnInit(): void {
+  constructor(private libroService: LibroService, private carrelloService: CarrelloService) {
+  }
 
-        this.libroService.getAllLibri().subscribe({
-            next: data => {
-                this.listaLibri = data as Array<Libro>;
-            },
-            error: err => {
-                console.log(err);
-            }
-        });
+  ngOnInit(): void {
 
-        this.carrelloService.getUpdate().subscribe({
-            next: data => {
-                this.carrello = data;
-            },
-            error: err => {
-                console.log(err);
-            }
-        })
-    }
+    this.libroService.getAllLibri().subscribe({
+      next: data => {
+        this.listaLibri = data as Array<Libro>;
+      },
+      error: err => {
+        console.log(err);
+      }
+    });
 
-    aggiungiLibroAlCarrello(libroID: number) {
-        this.carrelloService.aggiungiLibro(libroID, 1);
-    }
+    this.carrelloService.getUpdate().subscribe({
+      next: data => {
+        this.carrello = data;
+      },
+      error: err => {
+        console.log(err);
+      }
+    })
+  }
 
+  aggiungiLibroAlCarrello(libroID: number) {
+    this.carrelloService.aggiungiLibro(libroID, 1);
+  }
+
+  protected readonly alert = alert;
 }

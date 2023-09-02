@@ -1,5 +1,13 @@
 <div class="biblioteca">
-  <!--    <h1>I nostri libri...</h1>-->
+  <div class="ricerca">
+    <h1>Biblioteca</h1>
+    <div class="spacer"></div>
+    <input #search placeholder="Cerca..." type="text">
+    <a (click)="alert('da Implementare')">
+      <fa-icon [icon]="faSearch"></fa-icon>
+    </a>
+  </div>
+
   <div class="bookshelf">
     <div class="book" *ngFor="let libro of listaLibri">
       <div class="head">
