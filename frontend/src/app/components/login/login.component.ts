@@ -13,10 +13,10 @@ export class LoginComponent implements OnInit {
 
   isLoginShowing = true;
 
-  loginForm: any = {
-    username: null,
-    password: null,
-    remember: null
+  loginForm: LoginRequest = {
+    username: '',
+    password: '',
+    remember: false
   };
 
   registerForm: any = {

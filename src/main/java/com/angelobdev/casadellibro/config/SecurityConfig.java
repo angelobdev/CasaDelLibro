@@ -40,7 +40,7 @@ public class SecurityConfig {
                         .requestMatchers("/error").permitAll()
                         .requestMatchers("/api/auth/login").permitAll()
                         .requestMatchers("/api/auth/register").permitAll()
-                        .requestMatchers("/api/libri/all").permitAll()
+                        .requestMatchers("/api/libro/get/all").permitAll()
                         .anyRequest().hasAnyRole("USER", "ADMIN"))
                 .exceptionHandling(eh -> eh.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

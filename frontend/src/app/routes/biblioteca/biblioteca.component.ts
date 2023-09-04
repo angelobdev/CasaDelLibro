@@ -4,6 +4,8 @@ import {Carrello} from "../../models/carrello.model";
 import {Libro} from "../../models/libro.model";
 import {CarrelloService} from "../../services/carrello.service";
 import {faArrowDownWideShort, faBars, faSearch} from '@fortawesome/free-solid-svg-icons';
+import {StorageService} from "../../services/storage.service";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-biblioteca',
@@ -25,7 +27,7 @@ export class BibliotecaComponent implements OnInit {
   // Ricerca
   ricerca: string = "";
 
-  constructor(private libroService: LibroService, private carrelloService: CarrelloService) {
+  constructor(private libroService: LibroService, private carrelloService: CarrelloService, private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -39,14 +41,19 @@ export class BibliotecaComponent implements OnInit {
       }
     });
 
-    this.carrelloService.getUpdate().subscribe({
-      next: data => {
-        this.carrello = data;
-      },
-      error: err => {
-        console.log(err);
-      }
-    })
+    if (this.authService.isLoggedIn()) {
+      this.carrelloService.getUpdate().subscribe({
+        next: data => {
+          this.carrello = data;
+        },
+        error: err => {
+          console.log(err);
+        }
+      });
+    }
+
+
+
   }
 
   aggiungiLibroAlCarrello(libroID: number) {

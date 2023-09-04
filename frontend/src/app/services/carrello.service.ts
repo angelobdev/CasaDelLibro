@@ -18,34 +18,41 @@ export class CarrelloService {
   };
 
   constructor(private http: HttpClient, private storageService: StorageService) {
-    let utenteID = storageService.getJWToken()!.id;
 
-    // Cerco un carrello già esistente
-    this.http.get<Carrello>(this.URL + "/get/" + utenteID, this.httpOptions).subscribe({
-        next: data => {
+    let jwt = storageService.getJWToken();
 
-          if (data) {
-            this.sendUpdate(data as Carrello);
-          } else {
+    if (jwt) {
 
-            // Altrimenti ne creo uno nuovo
-            this.http.post<Carrello>(this.URL + "/create/" + utenteID, {}, this.httpOptions).subscribe({
-              next: data => {
-                this.sendUpdate(data as Carrello);
-              },
-              error: err => {
-                console.log(err);
-              }
-            });
+      let utenteID = jwt.id;
 
+      // Cerco un carrello già esistente
+      this.http.get<Carrello>(this.URL + "/get/" + utenteID, this.httpOptions).subscribe({
+          next: data => {
+
+            if (data) {
+              this.sendUpdate(data as Carrello);
+            } else {
+
+              // Altrimenti ne creo uno nuovo
+              this.http.post<Carrello>(this.URL + "/create/" + utenteID, {}, this.httpOptions).subscribe({
+                next: data => {
+                  this.sendUpdate(data as Carrello);
+                },
+                error: err => {
+                  console.log(err);
+                }
+              });
+
+            }
+
+          },
+          error: err => {
+            console.log(err)
           }
-
-        },
-        error: err => {
-          console.log(err)
         }
-      }
-    );
+      );
+
+    }
   }
 
   // OBSERVER
