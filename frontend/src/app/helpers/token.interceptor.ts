@@ -30,15 +30,17 @@ export class TokenInterceptor implements HttpInterceptor {
       });
     }
 
+    console.log(jwt);
+
     return next.handle(request).pipe(
       catchError((error) => {
 
-        // TODO: fix;
-        // // Logout quando il token scade!
-        // this.storageService.clean();
-        // alert("Accesso scaduto! Per favore riesegui il login!");
+        // Logout quando il token scade!
+        if (jwt && jwt.expiration > new Date()) {
+          this.storageService.clean();
+          alert("Accesso scaduto! Per favore riesegui il login!");
+        }
 
-        console.log(request);
         return throwError(() => error);
       })
     );

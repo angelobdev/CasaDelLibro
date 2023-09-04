@@ -10,6 +10,7 @@ import com.angelobdev.casadellibro.repository.UtenteRepository;
 import com.angelobdev.casadellibro.security.JwtUtils;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,14 +48,26 @@ public class AuthController {
     @Autowired
     private JwtUtils jwtUtils;
 
+    @Value("${com.angelobdev.casadellibro.jwtExpirationMs}")
+    private int jwtExpirationMs;
+
+    @Value("${com.angelobdev.casadellibro.jwtRememberExpirationMs}")
+    private int jwtRememberExpirationMs;
+
     @PostMapping("/login")
-    public ResponseEntity<?> login(@Valid @RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = jwtUtils.generateJwtToken(authentication);
+
+        Date expiration =
+                loginRequest.getRemember() ?
+                        new Date((new Date()).getTime() + jwtRememberExpirationMs) :
+                        new Date((new Date()).getTime() + jwtExpirationMs);
+
+        String jwt = jwtUtils.generateJwtToken(authentication, expiration);
 
         Utente utente = (Utente) authentication.getPrincipal();
         List<String> roles = utente.getAuthorities().stream()
@@ -66,7 +80,8 @@ public class AuthController {
                         utente.getId(),
                         utente.getUsername(),
                         utente.getEmail(),
-                        roles
+                        roles,
+                        expiration
                 )
         );
 
@@ -106,7 +121,8 @@ public class AuthController {
                 new UsernamePasswordAuthenticationToken(utente.getUsername(), registerRequest.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = jwtUtils.generateJwtToken(authentication);
+        Date expiration = new Date((new Date()).getTime() + jwtExpirationMs);
+        String jwt = jwtUtils.generateJwtToken(authentication, expiration);
 
         List<String> roles = utente.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
@@ -118,7 +134,8 @@ public class AuthController {
                         utente.getId(),
                         utente.getUsername(),
                         utente.getEmail(),
-                        roles
+                        roles,
+                        expiration
                 )
         );
     }

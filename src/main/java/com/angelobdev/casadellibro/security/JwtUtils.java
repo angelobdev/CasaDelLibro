@@ -20,17 +20,16 @@ public class JwtUtils {
     @Value("${com.angelobdev.casadellibro.jwtSecret}")
     private String jwtSecret;
 
-    @Value("${com.angelobdev.casadellibro.jwtExpirationMs}")
-    private int jwtExpirationMs;
 
-    public String generateJwtToken(Authentication authentication) {
+
+    public String generateJwtToken(Authentication authentication, Date expiration) {
 
         Utente utente = (Utente) authentication.getPrincipal();
 
         return Jwts.builder()
                 .setSubject(utente.getUsername())
                 .setIssuedAt(new Date())
-                .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
+                .setExpiration(expiration)
                 .signWith(key(), SignatureAlgorithm.HS256)
                 .compact();
     }

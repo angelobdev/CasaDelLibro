@@ -5,4 +5,5 @@ export interface JwtResponse {
   username: string,
   email: string,
   roles: Array<string>,
+  expiration: Date,
 }
