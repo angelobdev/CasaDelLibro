@@ -30,8 +30,6 @@ export class TokenInterceptor implements HttpInterceptor {
       });
     }
 
-    console.log(jwt);
-
     return next.handle(request).pipe(
       catchError((error) => {
 

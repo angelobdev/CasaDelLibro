@@ -1,9 +1,18 @@
 <div class="biblioteca">
   <div class="ricerca">
-    <h1>Biblioteca</h1>
+    <button [matMenuTriggerFor]="sort">
+      <fa-icon [icon]="faSort"></fa-icon>
+    </button>
+    <mat-menu #sort="matMenu">
+      <a mat-menu-item (click)="sortByTitolo()">Titolo</a>
+      <a mat-menu-item (click)="sortByAutore()">Autore</a>
+      <a mat-menu-item (click)="sortByPrezzo()">Prezzo</a>
+      <a mat-menu-item (click)="sortByQuantita()">Quantita</a>
+    </mat-menu>
+
     <div class="spacer"></div>
-    <input #search placeholder="Cerca..." type="text">
-    <a (click)="alert('da Implementare')">
+    <input [(ngModel)]="titoloCercato" placeholder="Cerca..." type="text" (ngModelChange)="cercaPerTitolo()">
+    <a (click)="cercaPerTitolo()">
       <fa-icon [icon]="faSearch"></fa-icon>
     </a>
   </div>

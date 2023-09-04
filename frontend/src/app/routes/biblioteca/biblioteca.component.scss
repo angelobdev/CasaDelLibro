@@ -24,8 +24,31 @@
   flex-direction: row;
 }
 
-.ricerca h1 {
-  font-family: "Pacifico", sans-serif;
+.ricerca button {
+  width: 2rem;
+  height: 2rem;
+  background: #E09F3E;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 0.4rem;
+  border: 1px solid #0002;
+
+  color: white;
+  transition: 0.4s;
+
+}
+
+.ricerca button:hover {
+  cursor: pointer;
+  font-size: 1.01rem;
+  transition: 0.4s;
+}
+
+.ricerca button:active {
+  background: #ceb185;
 }
 
 .ricerca .spacer {
@@ -34,7 +57,7 @@
 }
 
 .ricerca input {
-  width: 10rem;
+  width: 15rem;
   height: 2rem;
 
   padding: 0 0 0 0.6rem;
@@ -62,10 +85,23 @@
   border-right: 1px solid #0004;
 
   border-radius: 0 0.4rem 0.4rem 0;
+
+  color: white;
+  transition: 0.4s;
+}
+
+.ricerca a:hover {
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: 0.4s;
+}
+
+.ricerca a:active {
+  background: #ceb185;
 }
 
 .bookshelf {
-  width: 98vw;
+  width: 99%;
   display: inline-grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
