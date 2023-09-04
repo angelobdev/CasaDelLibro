@@ -1,6 +1,6 @@
 package com.angelobdev.casadellibro.security;
 
-import com.angelobdev.casadellibro.service.UtentiService;
+import com.angelobdev.casadellibro.service.UtenteService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,7 +25,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     private JwtUtils jwtUtils;
 
     @Autowired
-    private UtentiService utentiService;
+    private UtenteService utenteService;
 
     private static final Logger logger = LoggerFactory.getLogger(AuthTokenFilter.class);
 
@@ -48,7 +48,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
                 String username = jwtUtils.getUserNameFromJwtToken(jwt);
 
-                UserDetails userDetails = utentiService.loadUserByUsername(username);
+                UserDetails userDetails = utenteService.loadUserByUsername(username);
                 UsernamePasswordAuthenticationToken authentication =
                         new UsernamePasswordAuthenticationToken(
                                 userDetails,

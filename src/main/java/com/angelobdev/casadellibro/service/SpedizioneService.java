@@ -1,7 +1,7 @@
 package com.angelobdev.casadellibro.service;
 
 import com.angelobdev.casadellibro.model.Spedizione;
-import com.angelobdev.casadellibro.repository.SpedizioniRepository;
+import com.angelobdev.casadellibro.repository.SpedizioneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,12 +10,14 @@ import java.time.ZoneId;
 import java.util.Date;
 
 @Service
-public class SpedizioniService {
+public class SpedizioneService {
 
     @Autowired
-    private SpedizioniRepository spedizioniRepository;
+    private SpedizioneRepository spedizioneRepository;
 
-    public Spedizione creaSpedizione(String indirizzo) {
+    // CRUD
+
+    public Spedizione create(String indirizzo) {
         Spedizione spedizione = new Spedizione();
         spedizione.setDestinazione(indirizzo);
 
@@ -26,6 +28,6 @@ public class SpedizioniService {
         spedizione.setDataSpedizione(domani);
         spedizione.setStato("IN ELABORAZIONE");
 
-        return spedizioniRepository.save(spedizione);
+        return spedizioneRepository.save(spedizione);
     }
 }

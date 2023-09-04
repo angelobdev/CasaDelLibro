@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface CarrelliLibriRepository extends JpaRepository<CarrelloLibro, Integer> {
+public interface CarrelloLibroRepository extends JpaRepository<CarrelloLibro, Integer> {
 
     Optional<CarrelloLibro> findByCarrelloIdAndLibroId(Integer carrelloID, Integer libroID);
 

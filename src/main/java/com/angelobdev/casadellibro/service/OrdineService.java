@@ -1,13 +1,14 @@
 package com.angelobdev.casadellibro.service;
 
-import com.angelobdev.casadellibro.repository.OrdiniRepository;
+import com.angelobdev.casadellibro.repository.OrdineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class OrdiniService {
+@SuppressWarnings("unused")
+public class OrdineService {
 
     @Autowired
-    private OrdiniRepository ordiniRepository;
+    private OrdineRepository ordineRepository;
 
 }

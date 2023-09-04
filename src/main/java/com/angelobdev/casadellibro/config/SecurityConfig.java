@@ -2,7 +2,7 @@ package com.angelobdev.casadellibro.config;
 
 import com.angelobdev.casadellibro.security.AuthEntryPointJwt;
 import com.angelobdev.casadellibro.security.AuthTokenFilter;
-import com.angelobdev.casadellibro.service.UtentiService;
+import com.angelobdev.casadellibro.service.UtenteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,7 +25,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     @Autowired
-    private UtentiService utentiService;
+    private UtenteService utenteService;
 
     @Autowired
     private AuthEntryPointJwt unauthorizedHandler;
@@ -59,7 +59,7 @@ public class SecurityConfig {
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 
-        authProvider.setUserDetailsService(utentiService);
+        authProvider.setUserDetailsService(utenteService);
         authProvider.setPasswordEncoder(passwordEncoder());
 
         return authProvider;

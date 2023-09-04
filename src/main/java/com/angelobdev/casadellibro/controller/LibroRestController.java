@@ -1,6 +1,6 @@
 package com.angelobdev.casadellibro.controller;
 
-import com.angelobdev.casadellibro.service.LibriService;
+import com.angelobdev.casadellibro.service.LibroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -9,16 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/libri")
+@RequestMapping("/api/libro")
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials = "true")
 public class LibroRestController {
 
     @Autowired
-    private LibriService libriService;
+    private LibroService libroService;
 
-    @GetMapping("/all")
-    public ResponseEntity<?> all() {
-        return ResponseEntity.ok(libriService.getAllLibri());
+    @GetMapping("/get/all")
+    public ResponseEntity<?> getAll() {
+        return ResponseEntity.ok(libroService.getAll());
     }
 
 }

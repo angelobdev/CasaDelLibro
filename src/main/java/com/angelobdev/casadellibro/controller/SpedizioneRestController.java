@@ -1,6 +1,6 @@
 package com.angelobdev.casadellibro.controller;
 
-import com.angelobdev.casadellibro.service.SpedizioniService;
+import com.angelobdev.casadellibro.service.SpedizioneService;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.Valid;
@@ -16,12 +16,16 @@ import org.springframework.web.bind.annotation.*;
 public class SpedizioneRestController {
 
     @Autowired
-    private SpedizioniService spedizioniService;
+    private SpedizioneService spedizioneService;
 
-    @PostMapping("/crea")
-    public ResponseEntity<?> crea(@Valid @RequestBody SpedizioneDTO spedizioneDTO) {
-        return ResponseEntity.ok(spedizioniService.creaSpedizione(spedizioneDTO.getIndirizzo()));
+    // CRUD
+
+    @PostMapping("/create")
+    public ResponseEntity<?> create(@Valid @RequestBody SpedizioneDTO spedizioneDTO) {
+        return ResponseEntity.ok(spedizioneService.create(spedizioneDTO.getIndirizzo()));
     }
+
+    // DTOs
 
     @Data
     public static class SpedizioneDTO {

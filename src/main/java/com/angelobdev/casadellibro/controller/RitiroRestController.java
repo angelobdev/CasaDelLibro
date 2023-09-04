@@ -1,6 +1,6 @@
 package com.angelobdev.casadellibro.controller;
 
-import com.angelobdev.casadellibro.service.RitiriService;
+import com.angelobdev.casadellibro.service.RitiroService;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.Valid;
@@ -20,13 +20,17 @@ import java.util.Date;
 public class RitiroRestController {
 
     @Autowired
-    private RitiriService ritiriService;
+    private RitiroService ritiroService;
 
-    @PostMapping("/crea")
-    public ResponseEntity<?> crea(@Valid @RequestBody RitiroDTO ritiroDTO) throws ParseException {
+    // CRUD
+
+    @PostMapping("/create")
+    public ResponseEntity<?> create(@Valid @RequestBody RitiroDTO ritiroDTO) throws ParseException {
         Date data = new SimpleDateFormat("yyyy-MM-dd").parse(ritiroDTO.getDataScelta());
-        return ResponseEntity.ok(ritiriService.creaRitiro(data));
+        return ResponseEntity.ok(ritiroService.create(data));
     }
+
+    // DTOs
 
     @Data
     public static class RitiroDTO {

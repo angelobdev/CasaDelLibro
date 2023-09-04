@@ -6,11 +6,9 @@ import com.angelobdev.casadellibro.payload.request.RegisterRequest;
 import com.angelobdev.casadellibro.payload.response.JwtResponse;
 import com.angelobdev.casadellibro.payload.response.MessageResponse;
 import com.angelobdev.casadellibro.repository.RuoloRepository;
-import com.angelobdev.casadellibro.repository.UtentiRepository;
+import com.angelobdev.casadellibro.repository.UtenteRepository;
 import com.angelobdev.casadellibro.security.JwtUtils;
 import jakarta.validation.Valid;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -31,13 +29,13 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials = "true")
 public class AuthController {
 
-    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
+//    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
     @Autowired
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private UtentiRepository utentiRepository;
+    private UtenteRepository utenteRepository;
 
     @Autowired
     private RuoloRepository ruoloRepository;
@@ -78,14 +76,14 @@ public class AuthController {
     public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest registerRequest) throws ParseException {
 
         // Username esiste già
-        if (utentiRepository.existsByUsername(registerRequest.getUsername())) {
+        if (utenteRepository.existsByUsername(registerRequest.getUsername())) {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: Username is already taken!"));
         }
 
         // Email esiste già
-        if (utentiRepository.existsByEmail(registerRequest.getEmail())) {
+        if (utenteRepository.existsByEmail(registerRequest.getEmail())) {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: Email is already in use!"));
@@ -102,7 +100,7 @@ public class AuthController {
                 ruoloRepository.findByNome("ROLE_USER").orElse(null)
         );
 
-        utentiRepository.save(utente);
+        utenteRepository.save(utente);
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(utente.getUsername(), registerRequest.getPassword()));

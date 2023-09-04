@@ -1,7 +1,7 @@
 package com.angelobdev.casadellibro.controller;
 
 import com.angelobdev.casadellibro.payload.response.MessageResponse;
-import com.angelobdev.casadellibro.service.CarrelliService;
+import com.angelobdev.casadellibro.service.CarrelloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,42 +12,47 @@ import org.springframework.web.bind.annotation.*;
 public class CarrelloRestController {
 
     @Autowired
-    private CarrelliService carrelliService;
+    private CarrelloService carrelloService;
 
-    @PostMapping("/crea/{utenteID}")
-    public ResponseEntity<?> crea(@PathVariable Integer utenteID) {
-        return ResponseEntity.ok(carrelliService.createCarrello(utenteID));
+    // CRUD
+
+    @PostMapping("/create/{utenteID}")
+    public ResponseEntity<?> create(@PathVariable Integer utenteID) {
+        return ResponseEntity.ok(carrelloService.create(utenteID));
     }
+
+    @GetMapping("/get/all")
+    public ResponseEntity<?> getAll() {
+        return ResponseEntity.ok(carrelloService.getAll());
+    }
+
+    @GetMapping("/get/{utenteID}")
+    public ResponseEntity<?> getByUtente(@PathVariable Integer utenteID) {
+        return ResponseEntity.ok(carrelloService.getByUtenteId(utenteID));
+    }
+
+    @DeleteMapping("/delete/{carrelloID}")
+    public ResponseEntity<?> delete(@PathVariable Integer carrelloID) {
+        carrelloService.delete(carrelloID);
+        return ResponseEntity.ok(new MessageResponse("Carrello eliminato con successo!"));
+    }
+
+    // METHODS
 
     @PostMapping("/aggiungi/{carrelloID}/{libroID}/{quantita}")
     public ResponseEntity<?> aggiungi(@PathVariable Integer carrelloID, @PathVariable Integer libroID, @PathVariable Integer quantita) {
-        return ResponseEntity.ok(carrelliService.aggiungiLibro(carrelloID, libroID, quantita));
+        return ResponseEntity.ok(carrelloService.aggiungiLibro(carrelloID, libroID, quantita));
     }
 
     @PostMapping("/rimuovi/{carrelloID}/{libroID}/{quantita}")
     public ResponseEntity<?> rimuovi(@PathVariable Integer carrelloID, @PathVariable Integer libroID, @PathVariable Integer quantita) {
-        return ResponseEntity.ok(carrelliService.rimuoviLibro(carrelloID, libroID, quantita));
+        return ResponseEntity.ok(carrelloService.rimuoviLibro(carrelloID, libroID, quantita));
     }
 
     @PostMapping("/svuota/{carrelloID}")
     public ResponseEntity<?> svuota(@PathVariable Integer carrelloID) {
-        return ResponseEntity.ok(carrelliService.svuotaCarrello(carrelloID));
+        return ResponseEntity.ok(carrelloService.svuotaCarrello(carrelloID));
     }
 
-    @GetMapping("/get/{utenteID}")
-    public ResponseEntity<?> getCarelloUtente(@PathVariable Integer utenteID) {
-        return ResponseEntity.ok(carrelliService.getCarelloUtente(utenteID));
-    }
-
-    @GetMapping("/get/all")
-    public ResponseEntity<?> getAllCarelli() {
-        return ResponseEntity.ok(carrelliService.getAll());
-    }
-
-    @DeleteMapping("/delete/{carrelloID}")
-    public ResponseEntity<?> deleteCarello(@PathVariable Integer carrelloID) {
-        carrelliService.deleteCarello(carrelloID);
-        return ResponseEntity.ok(new MessageResponse("Carrello eliminato con successo!"));
-    }
 
 }

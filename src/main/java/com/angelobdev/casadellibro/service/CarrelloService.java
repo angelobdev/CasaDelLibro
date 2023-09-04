@@ -4,9 +4,9 @@ import com.angelobdev.casadellibro.model.Carrello;
 import com.angelobdev.casadellibro.model.Libro;
 import com.angelobdev.casadellibro.model.Utente;
 import com.angelobdev.casadellibro.model.support.CarrelloLibro;
-import com.angelobdev.casadellibro.repository.CarrelliRepository;
-import com.angelobdev.casadellibro.repository.LibriRepository;
-import com.angelobdev.casadellibro.service.support.CarrelliLibriService;
+import com.angelobdev.casadellibro.repository.CarrelloRepository;
+import com.angelobdev.casadellibro.repository.LibroRepository;
+import com.angelobdev.casadellibro.service.support.CarrelloLibroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,21 +15,23 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class CarrelliService {
+public class CarrelloService {
 
     @Autowired
-    private UtentiService utentiService;
+    private UtenteService utenteService;
 
     @Autowired
-    private CarrelliRepository carrelliRepository;
+    private CarrelloRepository carrelloRepository;
 
     @Autowired
-    private LibriRepository libriRepository;
+    private LibroRepository libroRepository;
 
     @Autowired
-    private CarrelliLibriService carrelliLibriService;
+    private CarrelloLibroService carrelloLibroService;
 
-    public Carrello createCarrello(Integer utenteID) {
+    // CRUD
+
+    public Carrello create(Integer utenteID) {
         Carrello carrello = new Carrello();
 
         carrello.setDataCreazione(new Date());
@@ -37,21 +39,35 @@ public class CarrelliService {
         carrello.setAcquistato(false);
         carrello.setLibri(new ArrayList<>());
 
-        Utente utente = utentiService.getById(utenteID);
+        Utente utente = utenteService.getById(utenteID);
         assert utente != null;
 
         carrello.setUtente(utente);
-        return carrelliRepository.save(carrello);
+        return carrelloRepository.save(carrello);
     }
+
+    public List<Carrello> getAll() {
+        return carrelloRepository.findAll();
+    }
+
+    public Carrello getByUtenteId(Integer utenteID) {
+        return carrelloRepository.findByUtenteId(utenteID).orElse(null);
+    }
+
+    public void delete(Integer carrelloID) {
+        carrelloRepository.deleteById(carrelloID);
+    }
+
+
+    // METHODS
 
     public Carrello aggiungiLibro(Integer carrelloID, Integer libroID, Integer quantitaDaAggiungere) {
 
-        CarrelloLibro carrelloLibro = carrelliLibriService.getCarrelloLibroByIds(carrelloID, libroID);
+        // Carico la relazione
+        CarrelloLibro carrelloLibro = carrelloLibroService.getByCarrelloIdAndLibroId(carrelloID, libroID);
 
-        // Se il libro è gia presente
         Carrello carrello;
         Libro libro;
-
 
         if (carrelloLibro != null) {
             // Libro già presente nel carrello
@@ -60,58 +76,49 @@ public class CarrelliService {
         } else {
 
             // Libro non ancora presente nel carrello
-            carrello = carrelliRepository.findById(carrelloID).orElse(null);
-            libro = libriRepository.findById(libroID).orElse(null);
-
-
+            carrello = carrelloRepository.findById(carrelloID).orElse(null);
+            libro = libroRepository.findById(libroID).orElse(null);
         }
 
         // Aggiungo al carrello
-        carrelliLibriService.aggiungiLibro(carrelloID, libroID, quantitaDaAggiungere);
+        carrelloLibroService.aggiungiLibro(carrelloID, libroID, quantitaDaAggiungere);
 
         // Aggiorno importo
         assert carrello != null && libro != null;
         double nuovoImporto = carrello.getImporto() + (libro.getPrezzo() * quantitaDaAggiungere);
         carrello.setImporto(nuovoImporto);
 
-        return carrelliRepository.save(carrello);
+        return carrelloRepository.save(carrello);
     }
 
     public Carrello rimuoviLibro(Integer carrelloID, Integer libroID, Integer quantitaDaRimuovere) {
-        CarrelloLibro carrelloLibro = carrelliLibriService.getCarrelloLibroByIds(carrelloID, libroID);
-        assert carrelloLibro != null;
+
+        // Carico la relazione
+        CarrelloLibro carrelloLibro = carrelloLibroService.getByCarrelloIdAndLibroId(carrelloID, libroID);
 
         Carrello carrello = carrelloLibro.getCarrello();
         Libro libro = carrelloLibro.getLibro();
 
-        carrelliLibriService.rimuoviLibro(carrelloID, libroID, quantitaDaRimuovere);
+        // Rimuovo dal carrello
+        carrelloLibroService.rimuoviLibro(carrelloID, libroID, quantitaDaRimuovere);
 
+        // Aggiorno l'importo
         double importo = carrello.getImporto() - (libro.getPrezzo() * quantitaDaRimuovere);
         carrello.setImporto(importo);
 
-        return carrelliRepository.save(carrello);
+        return carrelloRepository.save(carrello);
     }
 
     public Carrello svuotaCarrello(Integer carrelloID) {
-        carrelliLibriService.svuotaCarrello(carrelloID);
 
-        Carrello carrello = carrelliRepository.findById(carrelloID).orElse(null);
+        // Svuoto il carrello
+        carrelloLibroService.svuotaCarrello(carrelloID);
+
+        Carrello carrello = carrelloRepository.findById(carrelloID).orElse(null);
         assert carrello != null;
 
+        // Aggiorno l'importo
         carrello.setImporto(0.0);
-        return carrelliRepository.save(carrello);
+        return carrelloRepository.save(carrello);
     }
-
-    public Carrello getCarelloUtente(Integer utenteID) {
-        return carrelliRepository.findCarrelloByUtenteId(utenteID).orElse(null);
-    }
-
-    public List<Carrello> getAll() {
-        return carrelliRepository.findAll();
-    }
-
-    public void deleteCarello(Integer carrelloID) {
-        carrelliRepository.deleteById(carrelloID);
-    }
-
 }

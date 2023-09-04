@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface CarrelliRepository extends JpaRepository<Carrello, Integer> {
+public interface CarrelloRepository extends JpaRepository<Carrello, Integer> {
 
-    Optional<Carrello> findCarrelloByUtenteId(Integer utenteID);
+    Optional<Carrello> findByUtenteId(Integer utenteID);
 
 }

@@ -3,16 +3,16 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class UtenteService {
 
-    URL = "http://localhost:8080/api/user"
+  URL = "http://localhost:8080/api/utente"
 
-    constructor(private http: HttpClient) {
-    }
+  constructor(private http: HttpClient) {
+  }
 
-    getAvatar(username: string): Observable<any> {
-        return this.http.get<string>(this.URL + "/avatar/" + username);
-    }
+  getAvatar(username: string): Observable<any> {
+    return this.http.get<string>(this.URL + "/get/avatar/" + username);
+  }
 }
