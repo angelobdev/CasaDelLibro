@@ -3,19 +3,21 @@
 @import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
 
 header {
-  width: 100vw;
+  width: 100%;
   height: 3rem;
 
   position: fixed;
   top: 0;
   left: 0;
 
-  padding-top: 0.8rem;
-
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
+
+  background: #E09F3E;
+
+  box-shadow: 0 2px 2px #0004;
 }
 
 header .logo {
@@ -41,68 +43,55 @@ header .logo:hover {
 
 header .logo span {
   font-family: "Pacifico", sans-serif;
-  font-size: 2rem;
-  color: #393A10 ;
+  font-size: 1.8rem;
+  color: #393A10;
   text-shadow: 0 2px #0004;
 }
 
-header .menu {
-
-  background: #E09F3E;
-
-  width: 70%;
-  height: 100%;
-
-  box-shadow: 0 2px #0004;
-
-  border-radius: 0.6rem;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-
-  margin-right: 1rem;
-  padding-left: 1rem;
-}
-
-header .menu nav {
+header nav {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   flex-direction: row;
 }
 
-header .menu nav .left-content {
+header nav .left-content {
   width: 30%;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   flex-direction: row;
+  margin-right: auto;
+  margin-left: 1rem;
 }
 
-header .menu nav .right-content {
-  width: 26%;
+header nav .left-content > a {
+  margin-right: 1rem;
+}
+
+header nav .right-content {
+  width: 30%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   flex-direction: row;
   margin-right: 1rem;
 }
 
-header .menu nav .right-content > button {
+header nav .right-content > button {
   border-radius: 100%;
   color: white;
   transition: 0.4s;
+  margin-left: 1rem;
 }
 
-header .menu nav .right-content > button:hover {
+header nav .right-content > button:hover {
   transform: scale(110%);
   transition: 0.4s;
 }
 
-header .menu nav .right-content > button:active {
+header nav .right-content > button:active {
   transform: scale(120%);
   transition: 0.4s;
 }
@@ -123,7 +112,7 @@ header .menu nav .right-content > button:active {
   margin-left: 0.4rem;
 }
 
-header .menu nav a, button, span {
+header nav a, button, span {
   text-decoration: none;
   color: white;
   font-family: "Muli", sans-serif;
@@ -134,13 +123,13 @@ header .menu nav a, button, span {
   background: transparent;
 }
 
-header .menu nav a:hover, button:hover {
+header nav a:hover, button:hover {
   cursor: pointer;
   transform: scale(104%);
   transition: 0.4s;
 }
 
-header .menu nav .spacer {
+header nav .spacer {
   margin-left: 20%;
   margin-right: 20%;
 }
