@@ -23,7 +23,7 @@ export class BibliotecaComponent implements OnInit {
   asc = false;
 
   // Ricerca
-  titoloCercato: string = "";
+  ricerca: string = "";
 
   constructor(private libroService: LibroService, private carrelloService: CarrelloService) {
   }
@@ -57,18 +57,19 @@ export class BibliotecaComponent implements OnInit {
 
   cercaPerTitolo() {
 
-    this.titoloCercato = this.titoloCercato.toLowerCase();
-
     this.libroService.getAll().subscribe({
       next: data => {
         this.listaLibri = data as Array<Libro>;
 
-        if (this.titoloCercato.length == 0) {
+        if (this.ricerca.length == 0) {
           return;
         }
 
         this.listaLibri = this.listaLibri.filter((libro) => {
-          return libro.titolo.toLowerCase().includes(this.titoloCercato);
+          let titoloBool = libro.titolo.toLowerCase().includes(this.ricerca.toLowerCase());
+          let autoreBool = libro.autore.toLowerCase().includes(this.ricerca.toLowerCase());
+          let descrizioneBool = libro.descrizione.toLowerCase().includes(this.ricerca.toLowerCase());
+          return titoloBool || autoreBool || descrizioneBool;
         });
 
       },
@@ -88,9 +89,9 @@ export class BibliotecaComponent implements OnInit {
 
   sortByAutore() {
     this.listaLibri = this.listaLibri.sort((a, b) => {
-      let autoreA = a.autore.slice(3);
-      let autoreB = b.autore.slice(3);
-      return this.asc ? autoreA.localeCompare(autoreB) : autoreB.localeCompare(autoreA);
+      let autoreA = a.autore.split(" ").at(-1);
+      let autoreB = b.autore.split(" ").at(-1);
+      return this.asc ? autoreA!.localeCompare(autoreB!) : autoreB!.localeCompare(autoreA!);
     });
     this.asc = !this.asc;
   }

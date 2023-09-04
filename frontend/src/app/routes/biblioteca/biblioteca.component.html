@@ -11,7 +11,7 @@
     </mat-menu>
 
     <div class="spacer"></div>
-    <input [(ngModel)]="titoloCercato" placeholder="Cerca..." type="text" (ngModelChange)="cercaPerTitolo()">
+    <input [(ngModel)]="ricerca" placeholder="Cerca..." type="text" (ngModelChange)="cercaPerTitolo()">
     <a (click)="cercaPerTitolo()">
       <fa-icon [icon]="faSearch"></fa-icon>
     </a>
