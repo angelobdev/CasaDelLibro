@@ -71,8 +71,8 @@ export class CarrelloService {
         });
     }
 
-    rimuoviLibro(libroID: number) {
-        this.http.post(this.URL + "/rimuovi/" + this.carrello.getValue()?.id + "/" + libroID, {}, this.httpOptions).subscribe({
+    rimuoviLibro(libroID: number, quantita: number) {
+        this.http.post(this.URL + "/rimuovi/" + this.carrello.getValue()?.id + "/" + libroID + "/" + quantita, {}, this.httpOptions).subscribe({
             next: data => {
                 this.sendUpdate(data as Carrello);
             },

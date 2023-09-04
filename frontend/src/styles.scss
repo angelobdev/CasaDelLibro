@@ -1,6 +1,18 @@
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
 
-html, body { height: 100%; }
-body { margin: 0; }
+* {
+  font-family: "Muli", sans-serif;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+}
 
 

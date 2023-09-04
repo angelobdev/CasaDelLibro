@@ -24,19 +24,14 @@ public class CarrelloRestController {
         return ResponseEntity.ok(carrelliService.aggiungiLibro(carrelloID, libroID, quantita));
     }
 
-    @PostMapping("/rimuovi/{carrelloID}/{libroID}")
-    public ResponseEntity<?> rimuovi(@PathVariable Integer carrelloID, @PathVariable Integer libroID) {
-        return ResponseEntity.ok(carrelliService.rimuoviLibro(carrelloID, libroID));
+    @PostMapping("/rimuovi/{carrelloID}/{libroID}/{quantita}")
+    public ResponseEntity<?> rimuovi(@PathVariable Integer carrelloID, @PathVariable Integer libroID, @PathVariable Integer quantita) {
+        return ResponseEntity.ok(carrelliService.rimuoviLibro(carrelloID, libroID, quantita));
     }
 
     @PostMapping("/svuota/{carrelloID}")
     public ResponseEntity<?> svuota(@PathVariable Integer carrelloID) {
         return ResponseEntity.ok(carrelliService.svuotaCarrello(carrelloID));
-    }
-
-    @PostMapping("/acquista/{carrelloID}")
-    public ResponseEntity<?> acquista(@PathVariable Integer carrelloID, @RequestParam Integer spedizioneID, @RequestParam Integer ritiroID) {
-        return ResponseEntity.ok(carrelliService.acquistaCarrello(carrelloID, spedizioneID, ritiroID));
     }
 
     @GetMapping("/get/{utenteID}")

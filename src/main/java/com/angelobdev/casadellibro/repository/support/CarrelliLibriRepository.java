@@ -17,7 +17,7 @@ public interface CarrelliLibriRepository extends JpaRepository<CarrelloLibro, In
     @Modifying
     @Transactional
     @Query(value = "DELETE FROM carrelli_libri WHERE ctid IN( SELECT ctid FROM carrelli_libri WHERE (carrello_id = ?1 AND libro_id = ?2) LIMIT 1)", nativeQuery = true)
-    void rimuoviLibro(Integer carrelloID, Integer libroID);
+    void eliminaLibro(Integer carrelloID, Integer libroID);
 
     @Modifying
     @Transactional

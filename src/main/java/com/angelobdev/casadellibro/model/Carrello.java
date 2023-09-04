@@ -33,14 +33,8 @@ public class Carrello {
     @JoinColumn(name = "utente_id")
     private Utente utente;
 
-//    @OneToMany
-//    @JoinTable(name = "carrelli_libri",
-//            joinColumns = @JoinColumn(name = "carrello_id"),
-//            inverseJoinColumns = @JoinColumn(name = "libro_id"))
-//    private List<Libro> libri;
-
     @OneToMany(mappedBy = "carrello")
+    @OrderBy("id ASC")
     private List<CarrelloLibro> libri;
-
-
+    
 }

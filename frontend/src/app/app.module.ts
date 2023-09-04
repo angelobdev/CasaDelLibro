@@ -21,6 +21,7 @@ import {AziendaComponent} from './routes/azienda/azienda.component';
 import {MatMenuModule} from '@angular/material/menu';
 import { AccountComponent } from './routes/account/account.component';
 import { CarrelloComponent } from './components/carrello/carrello.component';
+import {MatRadioModule} from "@angular/material/radio";
 
 @NgModule({
     declarations: [
@@ -46,6 +47,7 @@ import { CarrelloComponent } from './components/carrello/carrello.component';
         MatInputModule,
         NgOptimizedImage,
         MatMenuModule,
+        MatRadioModule,
     ],
     providers: [
         {

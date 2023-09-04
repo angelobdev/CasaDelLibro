@@ -32,9 +32,13 @@ export class TokenInterceptor implements HttpInterceptor {
 
     return next.handle(request).pipe(
       catchError((error) => {
-        // Logout quando il token scade!
-        this.storageService.clean();
-        alert("Accesso scaduto! Per favore riesegui il login!");
+
+        // TODO: fix;
+        // // Logout quando il token scade!
+        // this.storageService.clean();
+        // alert("Accesso scaduto! Per favore riesegui il login!");
+
+        console.log(request);
         return throwError(() => error);
       })
     );

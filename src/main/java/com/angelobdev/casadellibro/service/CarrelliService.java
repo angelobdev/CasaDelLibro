@@ -1,9 +1,11 @@
 package com.angelobdev.casadellibro.service;
 
-import com.angelobdev.casadellibro.model.*;
+import com.angelobdev.casadellibro.model.Carrello;
+import com.angelobdev.casadellibro.model.Libro;
+import com.angelobdev.casadellibro.model.Utente;
 import com.angelobdev.casadellibro.model.support.CarrelloLibro;
-import com.angelobdev.casadellibro.repository.*;
-import com.angelobdev.casadellibro.repository.support.CarrelliLibriRepository;
+import com.angelobdev.casadellibro.repository.CarrelliRepository;
+import com.angelobdev.casadellibro.repository.LibriRepository;
 import com.angelobdev.casadellibro.service.support.CarrelliLibriService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +18,7 @@ import java.util.List;
 public class CarrelliService {
 
     @Autowired
-    private UtentiRepository utentiRepository;
+    private UtentiService utentiService;
 
     @Autowired
     private CarrelliRepository carrelliRepository;
@@ -27,17 +29,6 @@ public class CarrelliService {
     @Autowired
     private CarrelliLibriService carrelliLibriService;
 
-    @Autowired
-    private OrdiniRepository ordiniRepository;
-
-    @Autowired
-    private SpedizioniRepository spedizioniRepository;
-
-    @Autowired
-    private RitiriRepository ritiriRepository;
-    @Autowired
-    private CarrelliLibriRepository carrelliLibriRepository;
-
     public Carrello createCarrello(Integer utenteID) {
         Carrello carrello = new Carrello();
 
@@ -46,7 +37,7 @@ public class CarrelliService {
         carrello.setAcquistato(false);
         carrello.setLibri(new ArrayList<>());
 
-        Utente utente = utentiRepository.findById(utenteID).orElse(null);
+        Utente utente = utentiService.getById(utenteID);
         assert utente != null;
 
         carrello.setUtente(utente);
@@ -55,7 +46,7 @@ public class CarrelliService {
 
     public Carrello aggiungiLibro(Integer carrelloID, Integer libroID, Integer quantitaDaAggiungere) {
 
-        CarrelloLibro carrelloLibro = carrelliLibriRepository.findByCarrelloIdAndLibroId(carrelloID, libroID).orElse(null);
+        CarrelloLibro carrelloLibro = carrelliLibriService.getCarrelloLibroByIds(carrelloID, libroID);
 
         // Se il libro è gia presente
         Carrello carrello;
@@ -86,18 +77,17 @@ public class CarrelliService {
         return carrelliRepository.save(carrello);
     }
 
-    public Carrello rimuoviLibro(Integer carrelloID, Integer libroID) {
-        CarrelloLibro carrelloLibro = carrelliLibriRepository.findByCarrelloIdAndLibroId(carrelloID, libroID).orElse(null);
+    public Carrello rimuoviLibro(Integer carrelloID, Integer libroID, Integer quantitaDaRimuovere) {
+        CarrelloLibro carrelloLibro = carrelliLibriService.getCarrelloLibroByIds(carrelloID, libroID);
         assert carrelloLibro != null;
 
         Carrello carrello = carrelloLibro.getCarrello();
         Libro libro = carrelloLibro.getLibro();
-        Integer quantita = carrelloLibro.getQuantita();
 
-        double importo = carrello.getImporto() - (libro.getPrezzo() * quantita);
+        carrelliLibriService.rimuoviLibro(carrelloID, libroID, quantitaDaRimuovere);
+
+        double importo = carrello.getImporto() - (libro.getPrezzo() * quantitaDaRimuovere);
         carrello.setImporto(importo);
-
-        carrelliLibriService.rimuoviLibro(carrelloID, libroID);
 
         return carrelliRepository.save(carrello);
     }
@@ -110,40 +100,6 @@ public class CarrelliService {
 
         carrello.setImporto(0.0);
         return carrelliRepository.save(carrello);
-    }
-
-    public Ordine acquistaCarrello(Integer carrelloID, Integer spedizioneID, Integer ritiroID) {
-
-        if (spedizioneID > 0 && ritiroID > 0)
-            throw new RuntimeException("Un ordine non può essere associato a entrambi: spedizione e ritiro");
-
-        // Cerco il carrello da acquistare
-        Carrello carrello = carrelliRepository.findById(carrelloID).orElse(null);
-        assert carrello != null;
-
-        // Creo l'ordine
-        Ordine ordine = new Ordine();
-        ordine.setData(new Date());
-        ordine.setImporto(carrello.getImporto());
-        ordine.setCarrello(carrello);
-
-        // Assegno spedizione se esiste
-        if (spedizioneID > 0) {
-            Spedizione spedizione = spedizioniRepository.findById(spedizioneID).orElse(null);
-            ordine.setSpedizione(spedizione);
-        }
-
-        // Assegno ritiro se esiste
-        if (ritiroID > 0) {
-            Ritiro ritiro = ritiriRepository.findById(ritiroID).orElse(null);
-            ordine.setRitiro(ritiro);
-        }
-
-        carrello.setAcquistato(true);
-
-        carrelliRepository.save(carrello);
-        return ordiniRepository.save(ordine);
-
     }
 
     public Carrello getCarelloUtente(Integer utenteID) {
