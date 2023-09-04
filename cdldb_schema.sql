@@ -14,8 +14,8 @@ CREATE TABLE IF NOT EXISTS ruoli
 );
 
 -- Per il corretto funzionamento del codice il ruolo utente deve avere ID = 1;
-INSERT INTO ruoli (id, nome, grado)
-VALUES ('ROLE_UTENTE', 1);
+INSERT INTO ruoli (nome, grado)
+VALUES ('ROLE_USER', 1);
 
 INSERT INTO ruoli (nome, grado)
 VALUES ('ROLE_ADMIN', 999);
@@ -150,51 +150,3 @@ CREATE TABLE IF NOT EXISTS carrelli_libri
     FOREIGN KEY (libro_id) REFERENCES libri (id),
     PRIMARY KEY (id)
 );
-
---- *** VINCOLI *** ---
-
--- 1)   Al momento della creazione un ordine deve essere associato
---      ad una spedizione o un ritiro, ma non ad entrambi
---
-CREATE OR REPLACE FUNCTION check_ritiro_spedizione_ordine()
-    RETURNS TRIGGER AS
-$$
-BEGIN
-    -- Controllo che non esistano entrambi
-    IF NEW.spedizione_id IS NOT NULL AND NEW.ritiro_id IS NOT NULL THEN
-        RAISE EXCEPTION 'Un ordine non può essere associato sia a una spedizione che a un ritiro';
-    END IF;
-
-    -- Controllo che esista almeno uno dei due
-    IF NEW.spedizione_id IS NULL AND NEW.ritiro_id IS NULL THEN
-        RAISE EXCEPTION 'Un ordine deve essere associato almeno ad un ritiro o ad una spedizione';
-    end if;
-
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE OR REPLACE TRIGGER ritiro_spedizione_ordine
-    BEFORE INSERT
-    ON ordini
-    FOR EACH ROW
-EXECUTE FUNCTION check_ritiro_spedizione_ordine();
-
--- 2)   Al momento della creazione di un ordine il suo carrello deve
---      aggiornare il flag 'acquistato' (a true)
---
-
-CREATE OR REPLACE FUNCTION set_acquistato_flag_true()
-    RETURNS TRIGGER AS
-$$
-BEGIN
-    -- Aggiorno il carrello corrispondente
-    UPDATE carrelli SET acquistato= true WHERE id = NEW.carrello_id;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE OR REPLACE TRIGGER acquistato_flag_true_ordine
-    AFTER INSERT
-    ON ordini
-    FOR EACH ROW
-EXECUTE FUNCTION set_acquistato_flag_true();
