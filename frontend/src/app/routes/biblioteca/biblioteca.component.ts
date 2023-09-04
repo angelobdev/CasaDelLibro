@@ -23,7 +23,7 @@ export class BibliotecaComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.libroService.getAllLibri().subscribe({
+    this.libroService.getAll().subscribe({
       next: data => {
         this.listaLibri = data as Array<Libro>;
       },

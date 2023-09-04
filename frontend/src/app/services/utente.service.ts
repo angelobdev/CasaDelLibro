@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {MessageResponse} from "../payload/response/message.response";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class UtenteService {
   constructor(private http: HttpClient) {
   }
 
-  getAvatar(username: string): Observable<any> {
-    return this.http.get<string>(this.URL + "/get/avatar/" + username);
+  getAvatar(username: string) {
+    return this.http.get<MessageResponse>(this.URL + "/get/avatar/" + username);
   }
 }

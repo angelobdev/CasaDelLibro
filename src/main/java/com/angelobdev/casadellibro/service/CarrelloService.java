@@ -50,8 +50,12 @@ public class CarrelloService {
         return carrelloRepository.findAll();
     }
 
-    public Carrello getByUtenteId(Integer utenteID) {
-        return carrelloRepository.findByUtenteId(utenteID).orElse(null);
+    public Carrello getById(Integer carrelloID) {
+        return carrelloRepository.findById(carrelloID).orElse(null);
+    }
+
+    public Carrello getNonAcquistatoByUtenteId(Integer utenteID) {
+        return carrelloRepository.findNonAcquistatoByUtente(utenteID).orElse(null);
     }
 
     public void delete(Integer carrelloID) {

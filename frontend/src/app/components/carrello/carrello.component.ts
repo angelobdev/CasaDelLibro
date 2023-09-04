@@ -6,6 +6,7 @@ import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Spedizione} from "../../models/spedizione.model";
 import {Ritiro} from "../../models/ritiro.model";
+import {OrdineService} from "../../services/ordine.service";
 
 @Component({
   selector: 'app-carrello',
@@ -23,7 +24,6 @@ export class CarrelloComponent implements OnInit {
   ritiro = new Date();
   isChecked = true;
   dataMinima = new Date();
-  spedizioneRitiroID = -1;
 
   // HTTP
   URL = "http://localhost:8080/api";
@@ -34,14 +34,17 @@ export class CarrelloComponent implements OnInit {
   // Icone
   faRemove = faTrash;
 
-  constructor(private http: HttpClient, private carrelloService: CarrelloService, private storageService: StorageService) {
+  constructor(private http: HttpClient, private carrelloService: CarrelloService, private ordineService: OrdineService, private storageService: StorageService) {
 
   }
 
   ngOnInit(): void {
     this.dataMinima.setDate(this.dataMinima.getDate() + 1);
-
     this.utenteID = this.storageService.getJWToken()!.id;
+    this.updateCarrello();
+  }
+
+  updateCarrello() {
     this.carrelloService.getUpdate().subscribe({
       next: data => {
         this.carrello = data;
@@ -70,11 +73,21 @@ export class CarrelloComponent implements OnInit {
 
       // SPEDIZIONE
       case 0:
-        this.http.post(this.URL + "/spedizione/crea",
+        this.http.post<Spedizione>(this.URL + "/spedizione/create",
           {indirizzo: this.spedizione}).subscribe(
           {
-            next: data => {
-              this.spedizioneRitiroID = (data as Spedizione).id;
+            next: spedizione => {
+              console.log("Spedizione create");
+              this.ordineService.create(this.carrello!.id, spedizione.id, -1).subscribe({
+                  next: _ => {
+                    alert("Ordine effettuato con successo");
+                    window.location.reload();
+                  },
+                  error: err => {
+                    console.log(err);
+                  }
+                }
+              );
             },
             error: err => {
               console.log(err);
@@ -84,11 +97,21 @@ export class CarrelloComponent implements OnInit {
 
       // RITIRO
       case 1:
-        this.http.post(this.URL + "/ritiro/crea",
+        this.http.post<Ritiro>(this.URL + "/ritiro/create",
           {dataScelta: this.ritiro.toString()}).subscribe(
           {
-            next: data => {
-              this.spedizioneRitiroID = (data as Ritiro).id;
+            next: ritiro => {
+              console.log("Ritiro create");
+              this.ordineService.create(this.carrello!.id, -1, ritiro.id).subscribe({
+                  next: _ => {
+                    alert("Ordine effettuato con successo");
+                    window.location.reload();
+                  },
+                  error: err => {
+                    console.log(err);
+                  }
+                }
+              );
             },
             error: err => {
               console.log(err);
@@ -101,9 +124,6 @@ export class CarrelloComponent implements OnInit {
         throw Error("Non è stato possibile scegliere la modalità di consegna!");
 
     }
-
-    // Creo l'ordine
-
 
 
   }

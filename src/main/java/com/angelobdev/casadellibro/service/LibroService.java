@@ -16,7 +16,7 @@ public class LibroService {
     // CRUD
 
     public List<Libro> getAll() {
-        return libroRepository.findAll();
+        return libroRepository.findAllByOrderByTitoloAsc();
     }
 
 }

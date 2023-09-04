@@ -28,7 +28,7 @@ public class CarrelloRestController {
 
     @GetMapping("/get/{utenteID}")
     public ResponseEntity<?> getByUtente(@PathVariable Integer utenteID) {
-        return ResponseEntity.ok(carrelloService.getByUtenteId(utenteID));
+        return ResponseEntity.ok(carrelloService.getNonAcquistatoByUtenteId(utenteID));
     }
 
     @DeleteMapping("/delete/{carrelloID}")

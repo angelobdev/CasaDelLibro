@@ -15,11 +15,14 @@ public class RitiroService {
 
     // CRUD
 
-    public Ritiro create(Date dataScelta){
+    public Ritiro create(Date dataScelta) {
         Ritiro ritiro = new Ritiro();
         ritiro.setDataDisponibile(dataScelta);
         ritiro.setStato("IN PREPARAZIONE");
         return ritiroRepository.save(ritiro);
     }
 
+    public Ritiro getById(Integer ritiroID) {
+        return ritiroRepository.findById(ritiroID).orElse(null);
+    }
 }

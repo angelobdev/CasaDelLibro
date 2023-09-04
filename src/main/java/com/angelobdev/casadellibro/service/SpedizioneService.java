@@ -30,4 +30,8 @@ public class SpedizioneService {
 
         return spedizioneRepository.save(spedizione);
     }
+
+    public Spedizione getById(Integer spedizioneID){
+        return spedizioneRepository.findById(spedizioneID).orElse(null);
+    }
 }
