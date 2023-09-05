@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
     username: null,
     email: null,
     password: null,
-    rpassword: null, // TODO: check
+    rpassword: null,
   }
 
   isLoggedIn = false;
@@ -44,6 +44,15 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  loadError(error: string) {
+    this.errorMessage = error;
+    this.isLoginFailed = true;
+
+    setTimeout(() => {
+      this.errorMessage = "";
+    }, 5000);
+  }
+
   onLoginSubmit(): void {
 
     let data: LoginRequest = this.loginForm;
@@ -58,8 +67,7 @@ export class LoginComponent implements OnInit {
         this.reloadPage();
       },
       error: err => {
-        this.errorMessage = err.error.message;
-        this.isLoginFailed = true;
+        this.loadError(err.error.message);
       }
     });
   }
@@ -70,7 +78,7 @@ export class LoginComponent implements OnInit {
 
     // Controllo le password
     if (this.registerForm.password != this.registerForm.rpassword) {
-      this.errorMessage = "Le password non corrispondono";
+      this.loadError("Le password non corrispondono");
       return;
     }
 
@@ -87,8 +95,7 @@ export class LoginComponent implements OnInit {
         this.reloadPage();
       },
       error: err => {
-        this.errorMessage = err.error.message;
-        this.isLoginFailed = true;
+        this.loadError(err.error.message);
       }
     });
 

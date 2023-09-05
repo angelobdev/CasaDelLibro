@@ -38,7 +38,8 @@
         <p>{{libro.quantita}} in stock</p>
       </div>
       <div class="buttons">
-        <button (click)="aggiungiLibroAlCarrello(libro.id)">Aggiungi al Carrello</button>
+        <button *ngIf="isLoggedIn" (click)="aggiungiLibroAlCarrello(libro.id)">Aggiungi al Carrello</button>
+        <button *ngIf="!isLoggedIn" (click)="alertNotLogged()">Aggiungi al Carrello</button>
       </div>
       <p>ISBN: {{libro.id + 9788800000000}}</p>
     </div>

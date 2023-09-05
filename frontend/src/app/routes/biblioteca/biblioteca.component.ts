@@ -3,8 +3,7 @@ import {LibroService} from "../../services/libro.service";
 import {Carrello} from "../../models/carrello.model";
 import {Libro} from "../../models/libro.model";
 import {CarrelloService} from "../../services/carrello.service";
-import {faArrowDownWideShort, faBars, faSearch} from '@fortawesome/free-solid-svg-icons';
-import {StorageService} from "../../services/storage.service";
+import {faArrowDownWideShort, faBars, faClose, faSearch} from '@fortawesome/free-solid-svg-icons';
 import {AuthService} from "../../services/auth.service";
 
 @Component({
@@ -14,6 +13,7 @@ import {AuthService} from "../../services/auth.service";
 })
 export class BibliotecaComponent implements OnInit {
 
+  isLoggedIn = false;
   listaLibri: Array<Libro> = [];
   carrello: Carrello | null = null;
 
@@ -31,6 +31,8 @@ export class BibliotecaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.isLoggedIn = this.authService.isLoggedIn();
 
     this.libroService.getAll().subscribe({
       next: data => {
@@ -51,9 +53,10 @@ export class BibliotecaComponent implements OnInit {
         }
       });
     }
+  }
 
-
-
+  alertNotLogged() {
+    alert("Non sei loggato!");
   }
 
   aggiungiLibroAlCarrello(libroID: number) {
@@ -119,4 +122,5 @@ export class BibliotecaComponent implements OnInit {
 
   protected readonly alert = alert;
   protected readonly faBars = faBars;
+  protected readonly faClose = faClose;
 }
