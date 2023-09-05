@@ -27,7 +27,7 @@
 .ricerca button {
   width: 2rem;
   height: 2rem;
-  background: #E09F3E;
+  background: #AEB8FE;
 
   display: flex;
   justify-content: center;
@@ -48,7 +48,7 @@
 }
 
 .ricerca button:active {
-  background: #ceb185;
+  background: #ced2f5;
 }
 
 .ricerca .spacer {
@@ -73,7 +73,7 @@
 .ricerca a {
   width: 2rem;
   height: 2rem;
-  background: #E09F3E;
+  background: #AEB8FE;
 
   display: flex;
   justify-content: center;
@@ -97,7 +97,7 @@
 }
 
 .ricerca a:active {
-  background: #ceb185;
+  background: #d6d9f3;
 }
 
 .bookshelf {
@@ -171,7 +171,7 @@
 }
 
 .bookshelf .book .head .right-bar p:first-child {
-  background: #E09F3E;
+  background: #AEB8FE;
   color: white;
   width: 2rem;
   height: 2rem;
@@ -219,33 +219,15 @@
   border-radius: 0.6rem;
   transition: 0.2s;
   box-shadow: 0 2px 2px #0002;
+  background: #758BFD;
 }
 
 .bookshelf .book .buttons button:hover {
   transition: 0.2s;
   transform: scale(102%);
+  background: #aebbfa;
 }
 
-.bookshelf .book .buttons button:first-child {
-  background: #68b63d;
-}
-
-.bookshelf .book .buttons button:first-child:hover {
-  background: #7fb262;
-}
-
-.bookshelf .book .buttons button:first-child:active {
-  background: #90ad81;
-}
-
-.bookshelf .book .buttons button:last-child {
-  background: #35c5aa;
-}
-
-.bookshelf .book .buttons button:last-child:hover {
-  background: #65c2b0;
-}
-
-.bookshelf .book .buttons button:last-child:active {
-  background: #96ccc2;
+.bookshelf .book .buttons button:active {
+  background: #c9d1fa;
 }
