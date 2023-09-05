@@ -69,6 +69,11 @@ export class CarrelloComponent implements OnInit {
 
   acquistaCarrello() {
 
+    if (this.carrello?.libri.length == 0) {
+      alert("Inserisci almeno un articolo nel carrello prima di acquistare!");
+      return;
+    }
+
     switch (this.modalita) {
 
       // SPEDIZIONE

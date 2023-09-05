@@ -1,20 +1,6 @@
-#background {
-  width: 100vw;
-  height: 100vh;
-
-  position: fixed;
-  top: 0;
-  left: 0;
-
-  background: #EEE5E9;
-
-  z-index: -999;
-}
-
 .container {
-  padding-top: 4.5rem;
-  width: 100vw;
-  min-height: calc(100vh - 6.5rem);
+  padding-top: 3.6rem;
+  width: 100%;
 
   display: flex;
   justify-content: flex-start;

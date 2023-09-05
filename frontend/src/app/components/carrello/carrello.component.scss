@@ -34,11 +34,11 @@
 
 .carrello .libri ul li {
   width: 100%;
-  background: #E09F3E;
+  background: #758BFD;
   color: white;
 
-  margin-top: 1rem;
   padding: 1rem;
+  margin-bottom: 0.4rem;
 
   display: flex;
   justify-content: space-between;
@@ -89,7 +89,7 @@
   color: white;
   width: 1.6rem;
   height: 1.6rem;
-  background: #de2b2b;
+  background: #2F4858;
   transition: 0.4s;
   border: none;
   padding: 0;
@@ -104,14 +104,14 @@
 }
 
 .carrello .libri ul li .quantita button:hover {
-  background: #de4343;
+  background: #3a4c57;
   transition: 0.4s;
   transform: scale(102%);
   cursor: pointer;
 }
 
 .carrello .libri ul li .quantita button:active {
-  background: #d96565;
+  background: #454e54;
   transition: 0.4s;
 }
 
@@ -214,25 +214,25 @@
 }
 
 .carrello .buttons button:first-child {
-  background: #68b63d;
+  background: #2F4858;
 }
 
 .carrello .buttons button:first-child:hover {
-  background: #7fb262;
+  background: #3e4c56;
 }
 
 .carrello .buttons button:first-child:active {
-  background: #90ad81;
+  background: #454c50;
 }
 
 .carrello .buttons button:last-child {
-  background: #35c5aa;
+  background: #bd2c2c;
 }
 
 .carrello .buttons button:last-child:hover {
-  background: #65c2b0;
+  background: #b64e4e;
 }
 
 .carrello .buttons button:last-child:active {
-  background: #96ccc2;
+  background: #b46a6a;
 }

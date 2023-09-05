@@ -15,13 +15,13 @@ header {
   justify-content: center;
   flex-direction: row;
 
-  background: #E09F3E;
+  background: #2F4858;
 
   box-shadow: 0 2px 2px #0004;
 }
 
 header .logo {
-  width: 20%;
+  width: 17rem;
   height: 100%;
 
   margin-left: 1rem;
@@ -34,6 +34,7 @@ header .logo {
 
   text-decoration: none;
   transition: 0.4s;
+  //background: red;
 }
 
 header .logo:hover {
@@ -44,7 +45,7 @@ header .logo:hover {
 header .logo span {
   font-family: "Pacifico", sans-serif;
   font-size: 1.8rem;
-  color: #393A10;
+  color: #FF8600;
   text-shadow: 0 2px #0004;
 }
 
@@ -54,6 +55,7 @@ header nav {
   align-items: center;
   justify-content: flex-end;
   flex-direction: row;
+  //background: blue;
 }
 
 header nav .left-content {
