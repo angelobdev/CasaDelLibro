@@ -48,13 +48,14 @@ CREATE TABLE IF NOT EXISTS libri
 
     -- Informazioni libro
     titolo        VARCHAR(64)      NOT NULL,
-    descrizione   VARCHAR(255)     NOT NULL,
+    descrizione   VARCHAR(2048)     NOT NULL,
     autore        VARCHAR(64)      NOT NULL,
     numero_pagine INTEGER          NOT NULL,
     eta_minima    INTEGER          NOT NULL,
     quantita      INTEGER          NOT NULL,
     copertina     VARCHAR(255)     NOT NULL DEFAULT 'https://blog.springshare.com/wp-content/uploads/2010/02/nc-md.gif',
     prezzo        DOUBLE PRECISION NOT NULL DEFAULT 0.0,
+    editore       VARCHAR(64)      NOT NULL DEFAULT 'Anonimo',
 
     PRIMARY KEY (id)
 );
