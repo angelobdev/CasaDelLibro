@@ -39,4 +39,7 @@ public class Libro {
 
     @Column(name = "prezzo")
     private Double prezzo;
+
+    @Column(name = "editore")
+    private String editore;
 }
