@@ -59,6 +59,19 @@ export class BibliotecaComponent implements OnInit {
     alert("Non sei loggato!");
   }
 
+  ampliaDescrizione(id: number) {
+    let descrizione = document.getElementById("descrizione-" + id);
+    let button = document.getElementById("show-" + id);
+
+    if (descrizione!.style.webkitLineClamp !== "999") {
+      descrizione!.style.webkitLineClamp = "999";
+      button!.innerHTML = "Mostra meno"
+    } else {
+      descrizione!.style.webkitLineClamp = "10";
+      button!.innerHTML = "Mostra di piu..."
+    }
+  }
+
   aggiungiLibroAlCarrello(libroID: number) {
     this.carrelloService.aggiungiLibro(libroID, 1);
   }

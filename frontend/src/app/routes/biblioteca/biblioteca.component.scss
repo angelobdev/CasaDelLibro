@@ -188,6 +188,22 @@
   margin-bottom: 1rem;
 }
 
+.bookshelf .book .description p {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 10; /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
+
+.bookshelf .book .description a {
+  color:blue;
+  text-decoration: underline;
+}
+
+.bookshelf .book .description a:hover{
+  cursor: pointer;
+}
+
 .bookshelf .book .info {
   width: 100%;
   display: flex;

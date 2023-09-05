@@ -31,7 +31,8 @@
         </div>
       </div>
       <div class="description">
-        <p>{{libro.descrizione}}</p>
+        <p [id]="'descrizione-'+libro.id">{{libro.descrizione}}</p>
+        <a [id]="'show-'+libro.id" (click)="ampliaDescrizione(libro.id)">Mostra di più...</a>
       </div>
       <div class="info">
         <p>{{libro.prezzo.toFixed(2)}}€</p>
