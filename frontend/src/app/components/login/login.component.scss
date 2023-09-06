@@ -105,8 +105,15 @@
   padding: 0.4rem
 }
 
-.wrapper .content a {
+.wrapper .content button {
+  background: transparent;
+  border:none;
+  text-decoration: underline;
+  color: blue;
+}
 
+.wrapper .content button:hover{
+  cursor: pointer;
 }
 
 .form-line {

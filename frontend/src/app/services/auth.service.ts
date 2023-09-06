@@ -37,6 +37,7 @@ export class AuthService {
 
     logout(): void {
         this.storage.clean();
+        window.location.replace("/");
     }
 
     isLoggedIn(): boolean {

@@ -22,6 +22,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import { AccountComponent } from './routes/account/account.component';
 import { CarrelloComponent } from './components/carrello/carrello.component';
 import {MatRadioModule} from "@angular/material/radio";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
     declarations: [
@@ -48,6 +49,7 @@ import {MatRadioModule} from "@angular/material/radio";
         NgOptimizedImage,
         MatMenuModule,
         MatRadioModule,
+        MatProgressSpinnerModule,
     ],
     providers: [
         {
