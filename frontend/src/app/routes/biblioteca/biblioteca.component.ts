@@ -16,6 +16,7 @@ import {StorageService} from "../../services/storage.service";
 })
 export class BibliotecaComponent implements OnInit {
 
+  dataLoaded = false;
   isLoggedIn = false;
   listaLibri: Array<Libro> = [];
   libriPreferiti: Array<Libro> = [];
@@ -43,6 +44,7 @@ export class BibliotecaComponent implements OnInit {
     this.libroService.getAll().subscribe({
       next: data => {
         this.listaLibri = data as Array<Libro>;
+        this.dataLoaded = true;
       },
       error: err => {
         console.log(err);
@@ -74,6 +76,7 @@ export class BibliotecaComponent implements OnInit {
       });
 
     }
+
 
   }
 

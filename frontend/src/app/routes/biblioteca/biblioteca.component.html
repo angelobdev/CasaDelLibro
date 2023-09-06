@@ -1,4 +1,5 @@
-<div class="biblioteca">
+<mat-spinner *ngIf="!dataLoaded"></mat-spinner>
+<div class="biblioteca" *ngIf="dataLoaded">
   <div class="ricerca">
     <button [matMenuTriggerFor]="sort">
       <fa-icon [icon]="faSort"></fa-icon>

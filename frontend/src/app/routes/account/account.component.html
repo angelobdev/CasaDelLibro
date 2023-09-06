@@ -45,6 +45,7 @@
   </div>
   <div class="libri-preferiti">
     <h1>Libri preferiti</h1>
+    <p *ngIf="utente!.libriPreferiti.length === 0">Non hai libri preferiti!</p>
     <ul>
       <li *ngFor="let libro of utente!.libriPreferiti">
         <p>{{libro.titolo}} di {{libro.autore}}</p>
