@@ -13,7 +13,6 @@ CREATE TABLE IF NOT EXISTS ruoli
     PRIMARY KEY (id)
 );
 
--- Per il corretto funzionamento del codice il ruolo utente deve avere ID = 1;
 INSERT INTO ruoli (nome, grado)
 VALUES ('ROLE_USER', 1);
 
@@ -48,7 +47,7 @@ CREATE TABLE IF NOT EXISTS libri
 
     -- Informazioni libro
     titolo        VARCHAR(64)      NOT NULL,
-    descrizione   VARCHAR(2048)     NOT NULL,
+    descrizione   VARCHAR(2048)    NOT NULL,
     autore        VARCHAR(64)      NOT NULL,
     numero_pagine INTEGER          NOT NULL,
     eta_minima    INTEGER          NOT NULL,
@@ -103,14 +102,6 @@ CREATE TABLE IF NOT EXISTS spedizioni
 );
 
 -- Ordini
---
--- Vincoli:
--- 1)   Al momento della creazione un ordine deve essere associato
---      ad una spedizione o un ritiro, ma non ad entrambi
---
--- 2)   Al momento della creazione di un ordine il suo carrello deve
---      aggiornare il flag 'acquistato' (a true)
---
 CREATE TABLE IF NOT EXISTS ordini
 (
     id            SERIAL           NOT NULL,
@@ -128,7 +119,7 @@ CREATE TABLE IF NOT EXISTS ordini
     PRIMARY KEY (id)
 );
 
--- Preferenze utente, Relazione con libri (Molti a Molti)
+-- Relazione UTENTE - LIBRO (Molti a Molti) [Indica i libri preferiti dell'utente]
 CREATE TABLE IF NOT EXISTS preferenze_utenti
 (
     id        SERIAL  NOT NULL,
@@ -140,12 +131,13 @@ CREATE TABLE IF NOT EXISTS preferenze_utenti
     PRIMARY KEY (id)
 );
 
--- JOIN TABLE (carrelli - libri), Relazione Molti a Molti
+-- Relazione CARRELLO - LIBRO (Molti a Molti) [Indica i libri presenti in un determinato carrello]
 CREATE TABLE IF NOT EXISTS carrelli_libri
 (
     id          SERIAL  NOT NULL,
     carrello_id INTEGER NOT NULL,
     libro_id    INTEGER NOT NULL,
+    quantita    INTEGER NOT NULL DEFAULT 1,
 
     FOREIGN KEY (carrello_id) REFERENCES carrelli (id),
     FOREIGN KEY (libro_id) REFERENCES libri (id),
