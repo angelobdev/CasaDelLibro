@@ -13,7 +13,7 @@ import java.util.Date;
 public class Ordine {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "ordini_id_seq")
     @SequenceGenerator(name = "ordini_id_seq", allocationSize = 1)
     @Column(name = "id")
     private Integer id;

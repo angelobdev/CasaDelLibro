@@ -1,0 +1,67 @@
+<h1>Carrello</h1>
+
+<div class="carrello" *ngIf="!carrello">
+  <p>Nessun carrello presente!</p>
+</div>
+
+<div class="carrello" *ngIf="carrello">
+
+  <!--Scroll dei libri-->
+  <div class="libri">
+    <p *ngIf="carrello.libri.length == 0">Nessun libro nel carrello</p>
+    <ul>
+      <li *ngFor="let carrelloLibro of carrello.libri">
+
+        <div class="infobox">
+          <span>{{carrelloLibro.libro.titolo}}</span>
+          <span>{{carrelloLibro.libro.prezzo}} €/cad</span>
+        </div>
+
+        <div class="quantita">
+          <button (click)="rimuoviLibro(carrelloLibro.libro.id, 1)">-</button>
+          <span>{{carrelloLibro.quantita}}</span>
+          <button (click)="aggiungiLibro(carrelloLibro.libro.id, 1)">+</button>
+        </div>
+
+      </li>
+    </ul>
+  </div>
+
+  <div class="consegna" *ngIf="carrello.libri.length > 0">
+    <h3>Scegli la modalit&agrave; di consegna:</h3>
+
+    <div class="modalita">
+      <label>
+        <input [value]="0" [(ngModel)]="modalita" name="spedizione" type="radio" [checked]="isChecked"/> Spedizione
+      </label>
+      <label>
+        <input [value]="1" [(ngModel)]="modalita" name="ritiro" type="radio" [checked]="!isChecked"/> Ritiro in sede
+      </label>
+    </div>
+
+    <div class="form" *ngIf="modalita == 0">
+      <label>
+        Indirizzo di spedizione:
+        <input type="text" placeholder="Destinazione" [(ngModel)]="spedizione">
+      </label>
+    </div>
+
+    <div class="form" *ngIf="modalita == 1">
+      <label>
+        Scegli la data di ritiro:
+        <input [(ngModel)]="ritiro" type="date" min="{{dataMinima | date: 'yyyy-MM-dd'}}"
+               [value]="dataMinima">
+      </label>
+    </div>
+
+  </div>
+
+  <div class="info">
+    <p>Totale: {{carrello.importo.toFixed(2)}}€</p>
+  </div>
+
+  <div class="buttons">
+    <button (click)="acquistaCarrello()">Acquista</button>
+    <button (click)="svuotaCarrello()">Svuota</button>
+  </div>
+</div>

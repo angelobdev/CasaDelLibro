@@ -1,0 +1,55 @@
+<mat-spinner *ngIf="!dataLoaded"></mat-spinner>
+<div class="account" *ngIf="dataLoaded">
+  <div class="gestione-account">
+    <h1>Gestione Account</h1>
+
+
+    <div class="input-line">
+      <h3>Nome</h3>
+      <input type="text" [value]="utente!.nome" [(ngModel)]="utente!.nome">
+    </div>
+
+    <div class="input-line">
+      <h3>Cognome</h3>
+      <input type="text" [value]="utente!.cognome" [(ngModel)]="utente!.cognome">
+    </div>
+
+    <div class="input-line">
+      <h3>Data di Nascita</h3>
+      <input type="date" [value]="utente!.dataNascita" [(ngModel)]="utente!.dataNascita">
+    </div>
+
+    <div class="input-line">
+      <h3>Username</h3>
+      <input type="text" [value]="utente!.username" [(ngModel)]="utente!.username">
+    </div>
+
+    <div class="input-line">
+      <h3>E-Mail</h3>
+      <input type="text" [value]="utente!.email" [(ngModel)]="utente!.email">
+    </div>
+
+    <div class="input-line">
+      <h3>Password</h3>
+      <input type="password" [value]="utente!.password" [(ngModel)]="utente!.password">
+    </div>
+
+    <div class="input-line">
+      <h3>Avatar</h3>
+      <input type="text" [value]="utente!.avatar" [(ngModel)]="utente!.avatar">
+    </div>
+
+    <button (click)="aggiornaUtente()">Salva</button>
+
+
+  </div>
+  <div class="libri-preferiti">
+    <h1>Libri preferiti</h1>
+    <p *ngIf="utente!.libriPreferiti.length === 0">Non hai libri preferiti!</p>
+    <ul>
+      <li *ngFor="let libro of utente!.libriPreferiti">
+        <p>{{libro.titolo}} di {{libro.autore}}</p>
+      </li>
+    </ul>
+  </div>
+</div>

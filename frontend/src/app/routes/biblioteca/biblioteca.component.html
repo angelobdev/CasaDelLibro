@@ -1,0 +1,63 @@
+<mat-spinner *ngIf="!dataLoaded"></mat-spinner>
+<div class="biblioteca" *ngIf="dataLoaded">
+  <div class="ricerca">
+    <button [matMenuTriggerFor]="sort">
+      <fa-icon [icon]="faSort"></fa-icon>
+    </button>
+    <mat-menu #sort="matMenu">
+      <a mat-menu-item (click)="sortByTitolo()">Titolo</a>
+      <a mat-menu-item (click)="sortByAutore()">Autore</a>
+      <a mat-menu-item (click)="sortByPrezzo()">Prezzo</a>
+      <a mat-menu-item (click)="sortByQuantita()">Quantita</a>
+    </mat-menu>
+
+    <div class="spacer"></div>
+    <input [(ngModel)]="ricerca" placeholder="Cerca..." type="text" (ngModelChange)="cercaPerTitolo()">
+    <a (click)="cercaPerTitolo()">
+      <fa-icon [icon]="faSearch"></fa-icon>
+    </a>
+  </div>
+
+  <div class="bookshelf">
+    <div class="book" *ngFor="let libro of listaLibri">
+      <div class="head">
+        <img alt="{{libro.titolo}}" [src]="libro.copertina">
+        <div class="title">
+          <h2>{{libro.titolo}}</h2>
+          <h3>di {{libro.autore}}<br>{{libro.editore}}</h3>
+        </div>
+        <div class="right-bar">
+          <p>{{libro.etaMinima}}+</p>
+          <p>{{libro.numeroPagine}}p</p>
+        </div>
+      </div>
+      <div class="description">
+        <p [id]="'descrizione-'+libro.id">{{libro.descrizione}}</p>
+        <a [id]="'show-'+libro.id" (click)="ampliaDescrizione(libro.id)">Mostra di più...</a>
+      </div>
+      <div class="info">
+        <p>{{libro.prezzo.toFixed(2)}}€</p>
+        <p>{{libro.quantita}} in stock</p>
+      </div>
+      <div class="buttons">
+        <!--AGGIUNGI AL CARRELLO-->
+        <button class="acquista" *ngIf="isLoggedIn" (click)="aggiungiLibroAlCarrello(libro.id)">
+          Aggiungi al Carrello <!-- Loggato -->
+        </button>
+        <button class="acquista" *ngIf="!isLoggedIn" (click)="alertNotLogged()">
+          Aggiungi al Carrello <!--Non Loggato-->
+        </button>
+
+        <!--LIKE-->
+        <button class="like" *ngIf="isLoggedIn" (click)="toggleLike(libro.id)">
+          <fa-icon [icon]="isLibroPreferito(libro.id) ? faLikeFull : faLikeEmpty"></fa-icon>
+        </button>
+        <button class="like" *ngIf="!isLoggedIn" (click)="alertNotLogged()">
+          <fa-icon [icon]="faLikeEmpty"></fa-icon>
+        </button>
+
+      </div>
+      <p>ISBN: {{libro.id + 9788800000000}}</p>
+    </div>
+  </div>
+</div>

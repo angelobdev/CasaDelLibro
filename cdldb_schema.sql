@@ -13,6 +13,13 @@ CREATE TABLE IF NOT EXISTS ruoli
     PRIMARY KEY (id)
 );
 
+-- Per il corretto funzionamento del codice il ruolo utente deve avere ID = 1;
+INSERT INTO ruoli (nome, grado)
+VALUES ('ROLE_USER', 1);
+
+INSERT INTO ruoli (nome, grado)
+VALUES ('ROLE_ADMIN', 999);
+
 -- Utenti
 CREATE TABLE IF NOT EXISTS utenti
 (
@@ -37,17 +44,18 @@ CREATE TABLE IF NOT EXISTS utenti
 -- Libri
 CREATE TABLE IF NOT EXISTS libri
 (
-    id            SERIAL       NOT NULL,
+    id            SERIAL           NOT NULL,
 
     -- Informazioni libro
-    titolo        VARCHAR(64)  NOT NULL,
-    descrizione   VARCHAR(255) NOT NULL,
-    autore        VARCHAR(64)  NOT NULL,
-    numero_pagine INTEGER      NOT NULL,
-    eta_minima    INTEGER      NOT NULL,
-
-    -- Informazioni stoccaggio
-    quantita      INTEGER      NOT NULL,
+    titolo        VARCHAR(64)      NOT NULL,
+    descrizione   VARCHAR(2048)     NOT NULL,
+    autore        VARCHAR(64)      NOT NULL,
+    numero_pagine INTEGER          NOT NULL,
+    eta_minima    INTEGER          NOT NULL,
+    quantita      INTEGER          NOT NULL,
+    copertina     VARCHAR(255)     NOT NULL DEFAULT 'https://blog.springshare.com/wp-content/uploads/2010/02/nc-md.gif',
+    prezzo        DOUBLE PRECISION NOT NULL DEFAULT 0.0,
+    editore       VARCHAR(64)      NOT NULL DEFAULT 'Anonimo',
 
     PRIMARY KEY (id)
 );
@@ -143,51 +151,3 @@ CREATE TABLE IF NOT EXISTS carrelli_libri
     FOREIGN KEY (libro_id) REFERENCES libri (id),
     PRIMARY KEY (id)
 );
-
---- *** VINCOLI *** ---
-
--- 1)   Al momento della creazione un ordine deve essere associato
---      ad una spedizione o un ritiro, ma non ad entrambi
---
-CREATE OR REPLACE FUNCTION check_ritiro_spedizione_ordine()
-    RETURNS TRIGGER AS
-$$
-BEGIN
-    -- Controllo che non esistano entrambi
-    IF NEW.spedizione_id IS NOT NULL AND NEW.ritiro_id IS NOT NULL THEN
-        RAISE EXCEPTION 'Un ordine non può essere associato sia a una spedizione che a un ritiro';
-    END IF;
-
-    -- Controllo che esista almeno uno dei due
-    IF NEW.spedizione_id IS NULL AND NEW.ritiro_id IS NULL THEN
-        RAISE EXCEPTION 'Un ordine deve essere associato almeno ad un ritiro o ad una spedizione';
-    end if;
-
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE OR REPLACE TRIGGER ritiro_spedizione_ordine
-    BEFORE INSERT
-    ON ordini
-    FOR EACH ROW
-EXECUTE FUNCTION check_ritiro_spedizione_ordine();
-
--- 2)   Al momento della creazione di un ordine il suo carrello deve
---      aggiornare il flag 'acquistato' (a true)
---
-
-CREATE OR REPLACE FUNCTION set_acquistato_flag_true()
-    RETURNS TRIGGER AS
-$$
-BEGIN
-    -- Aggiorno il carrello corrispondente
-    UPDATE carrelli SET acquistato= true WHERE id = NEW.carrello_id;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE OR REPLACE TRIGGER acquistato_flag_true_ordine
-    AFTER INSERT
-    ON ordini
-    FOR EACH ROW
-EXECUTE FUNCTION set_acquistato_flag_true();

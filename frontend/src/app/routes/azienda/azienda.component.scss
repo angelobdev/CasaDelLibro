@@ -1,0 +1,39 @@
+.azienda {
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.azienda .area:nth-child(odd) {
+  background: #AEB8FE66;
+}
+
+.area {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: row;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.area .image {
+  width: 30%;
+  height: 100%;
+}
+
+.area .image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1rem;
+}
+
+.area .text {
+  width: 60%;
+  height: 100%;
+  text-align: justify;
+}

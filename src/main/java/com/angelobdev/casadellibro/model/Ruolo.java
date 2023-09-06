@@ -11,7 +11,7 @@ import lombok.Setter;
 public class Ruolo {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "ruoli_id_seq")
     @SequenceGenerator(name = "ruoli_id_seq", allocationSize = 1)
     @Column(name = "id")
     private Integer id;

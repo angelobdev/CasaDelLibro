@@ -1,0 +1,166 @@
+.wrapper {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.wrapper .title {
+  font-size: 1.4rem;
+}
+
+.wrapper .content {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.wrapper .content form {
+  width: 100%;
+  height: 100%;
+}
+
+.wrapper .content form .form-field {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  margin-bottom: 1rem;
+}
+
+.wrapper .content form .form-field label {
+  margin-right: auto;
+}
+
+.wrapper .content form .form-field input {
+  width: 100%;
+  height: 2rem;
+
+  border: 1px solid #0002;
+  border-radius: 0.4rem;
+}
+
+.wrapper .content form .form-actions {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.wrapper .content form .form-extra {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  margin-top: 1rem;
+}
+
+.wrapper .content form .form-extra div {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.wrapper .content form .form-actions input[type=submit] {
+  width: 100%;
+  height: 2rem;
+  color: white;
+  background: #758BFD;
+  border: 1px solid #0002;
+  border-radius: 0.4rem;
+  box-shadow: 0 0 5px #0002;
+  margin-top: 2rem;
+}
+
+.wrapper .content .divider {
+  width: 100%;
+  height: 1px;
+  background: #0002;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.wrapper .content span {
+  background: white;
+  padding: 0.4rem
+}
+
+.wrapper .content button {
+  background: transparent;
+  border:none;
+  text-decoration: underline;
+  color: blue;
+}
+
+.wrapper .content button:hover{
+  cursor: pointer;
+}
+
+.form-line {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.form-line > div:first-child {
+  margin-right: 1rem;
+}
+
+@keyframes fade {
+  0%, 100% {
+    opacity: 0
+  }
+  10% {
+    opacity: 1
+  }
+  90%{
+    opacity: 1;
+  }
+}
+
+.error-container {
+  width: 98%;
+  background: red;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  padding: 0.4rem;
+  margin: 0.4rem;
+  border-radius: 0.4rem;
+
+  position: absolute;
+  top: -3rem;
+
+  opacity: 1;
+  animation: fade 5s linear;
+}
+
+.error-container > span {
+  color: white;
+  font-weight: bold;
+}

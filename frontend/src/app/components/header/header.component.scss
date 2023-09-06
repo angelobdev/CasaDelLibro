@@ -1,0 +1,182 @@
+@use "../../app.component" as app;
+@import url('https://fonts.googleapis.com/css?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
+
+header {
+  width: 100%;
+  height: 3rem;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+
+  background: #2F4858;
+
+  box-shadow: 0 2px 2px #0004;
+}
+
+header .logo {
+  width: 17rem;
+  height: 100%;
+
+  margin-left: 1rem;
+  margin-right: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+
+  text-decoration: none;
+  transition: 0.4s;
+  //background: red;
+}
+
+header .logo:hover {
+  transform: scale(102%);
+  transition: 0.4s;
+}
+
+header .logo span {
+  font-family: "Pacifico", sans-serif;
+  font-size: 1.8rem;
+  color: #FF8600;
+  text-shadow: 0 2px #0004;
+}
+
+header nav {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: row;
+  //background: blue;
+}
+
+header nav .left-content {
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  margin-right: auto;
+  margin-left: 1rem;
+}
+
+header nav .left-content > a {
+  margin-right: 1rem;
+}
+
+header nav .right-content {
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: row;
+  margin-right: 1rem;
+}
+
+header nav .right-content > button {
+  border-radius: 100%;
+  color: white;
+  transition: 0.4s;
+  margin-left: 1rem;
+}
+
+header nav .right-content > button:hover {
+  transform: scale(110%);
+  transition: 0.4s;
+}
+
+header nav .right-content > button:active {
+  transform: scale(120%);
+  transition: 0.4s;
+}
+
+.dropdown button {
+  color: black;
+}
+
+.avatar {
+  width: 1.8rem;
+  height: 1.8rem;
+  object-fit: cover;
+  margin-right: 0.4rem;
+  border-radius: 100%;
+}
+
+.logout {
+  border-left: 2px solid white;
+  margin-left: 0.4rem;
+}
+
+header nav a, button, span {
+  text-decoration: none;
+  color: white;
+  font-family: "Muli", sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  transition: 0.4s;
+  border: 0;
+  background: transparent;
+}
+
+header nav a:hover, button:hover {
+  cursor: pointer;
+  transform: scale(104%);
+  transition: 0.4s;
+}
+
+header nav .spacer {
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+.login-container {
+  background: white;
+
+  position: absolute;
+  top: 20vh;
+
+  width: 30vw;
+  height: 65vh;
+
+  border: 1px solid #0002;
+  border-radius: 0.4rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  box-shadow: 0 0 40px #0008;
+}
+
+
+.close-button {
+  color: black;
+  position: absolute;
+  right: 0.4rem;
+  top: 0.4rem;
+}
+
+app-login {
+  width: 90%;
+  height: 90%;
+}
+
+.cart-container {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 30vw;
+  height: 100vh;
+  background: white;
+  padding: 0.4rem;
+  box-shadow: -2px 0 8px #0002;
+}

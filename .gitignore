@@ -1,4 +1,3 @@
-HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
@@ -32,6 +31,8 @@ build/
 ### VS Code ###
 .vscode/
 
+## macOS
+.DS_Store
 
 # FRONTEND (ANGULAR)
 # See http://help.github.com/ignore-files/ for more about ignoring files.
@@ -76,4 +77,6 @@ frontend/typings
 # System files
 frontend/.DS_Store
 frontend/Thumbs.db
+
+Features.txt
 

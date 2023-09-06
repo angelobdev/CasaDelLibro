@@ -13,7 +13,7 @@ import java.util.Date;
 public class Ritiro {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "ritiri_id_seq")
     @SequenceGenerator(name = "ritiri_id_seq", allocationSize = 1)
     @Column(name = "id")
     private Integer id;

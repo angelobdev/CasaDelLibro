@@ -14,7 +14,7 @@ import java.util.Date;
 public class Spedizione {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "spedizioni_id_seq")
     @SequenceGenerator(name = "spedizioni_id_seq", allocationSize = 1)
     @Column(name = "id")
     private Integer id;

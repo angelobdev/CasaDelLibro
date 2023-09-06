@@ -1,0 +1,207 @@
+<!--LOGIN-->
+<div class="wrapper" *ngIf="isLoginShowing">
+  <div class="error-container" *ngIf="errorMessage">
+    <span>{{errorMessage}}</span>
+  </div>
+  <h3 class="title">Login</h3>
+  <div class="content">
+    <form
+      name="loginForm"
+      (ngSubmit)="f.form.valid && onLoginSubmit()"
+      #f="ngForm"
+      novalidate
+    >
+      <div class="form-field">
+        <label>Username</label>
+        <input
+          type="text"
+          class="form-control"
+          name="username"
+          [(ngModel)]="loginForm.username"
+          required
+          #username="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && username.errors }"
+        >
+        <div *ngIf="username.errors && f.submitted" class="invalid-feedback">
+          Il campo username è obbligatorio!
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Password</label>
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          [(ngModel)]="loginForm.password"
+          required
+          minlength="6"
+          #password="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
+        />
+        <div *ngIf="password.errors && f.submitted" class="invalid-feedback">
+          <div *ngIf="password.errors['required']">Il campo password è obbligatorio!</div>
+          <div *ngIf="password.errors['minlength']">
+            La password deve essere formata da almeno 6 caratteri!
+          </div>
+        </div>
+      </div>
+      <div class="form-actions">
+        <input type="submit" value="Accedi">
+      </div>
+      <div class="form-extra">
+        <div>
+          <input type="checkbox" name="ricordami" [(ngModel)]="loginForm.remember">
+          <label>Ricordami</label>
+        </div>
+        <a onclick="alert('Non ancora implementato')" routerLink="#">Password dimenticata?</a>
+      </div>
+    </form>
+    <div class="divider">
+      <span>oppure</span>
+    </div>
+    <br>
+    <button (click)="switchLoginRegister()">Registrati</button>
+  </div>
+</div>
+
+<!--REGISTRAZIONE-->
+<div class="wrapper" *ngIf="!isLoginShowing">
+  <div class="error-container" *ngIf="errorMessage">
+    <span>{{errorMessage}}</span>
+  </div>
+  <h3 class="title">Registrazione</h3>
+  <div class="content">
+    <form
+      name="registerForm"
+      (ngSubmit)="f.form.valid && onRegisterSubmit()"
+      #f="ngForm"
+      novalidate
+    >
+      <div class="form-line">
+        <div class="form-field">
+          <label>Nome</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nome"
+            [(ngModel)]="registerForm.nome"
+            required
+            #nome="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && nome.errors }"
+          >
+          <div *ngIf="nome.errors && f.submitted" class="invalid-feedback">
+            Il campo nome è obbligatorio!
+          </div>
+        </div>
+        <div class="form-field">
+          <label>Cognome</label>
+          <input
+            type="text"
+            class="form-control"
+            name="cognome"
+            [(ngModel)]="registerForm.cognome"
+            required
+            #cognome="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && cognome.errors }"
+          >
+          <div *ngIf="cognome.errors && f.submitted" class="invalid-feedback">
+            Il campo cognome è obbligatorio!
+          </div>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label>Username</label>
+        <input
+          type="text"
+          class="form-control"
+          name="username"
+          [(ngModel)]="registerForm.username"
+          required
+          #username="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && username.errors }"
+        >
+        <div *ngIf="username.errors && f.submitted" class="invalid-feedback">
+          Il campo username è obbligatorio!
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label>E-Mail</label>
+        <input
+          type="email"
+          class="form-control"
+          name="email"
+          [(ngModel)]="registerForm.email"
+          required
+          #email="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && email.errors }"
+        >
+        <div *ngIf="email.errors && f.submitted" class="invalid-feedback">
+          Il campo e-Mail è obbligatorio!
+        </div>
+      </div>
+
+      <div class="form-line">
+        <div class="form-field">
+          <label>Password</label>
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            [(ngModel)]="registerForm.password"
+            required
+            #password="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
+          >
+          <div *ngIf="password.errors && f.submitted" class="invalid-feedback">
+            Il campo password è obbligatorio!
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label>Ripeti Password</label>
+          <input
+            type="password"
+            class="form-control"
+            name="rpassword"
+            [(ngModel)]="registerForm.rpassword"
+            required
+            #rpassword="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && rpassword.errors }"
+          >
+          <div *ngIf="rpassword.errors && f.submitted" class="invalid-feedback">
+            Il campo password è obbligatorio!
+          </div>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label>Data di Nascita</label>
+        <input
+          type="date"
+          class="form-control"
+          name="dataNascita"
+          [(ngModel)]="registerForm.dataNascita"
+          required
+          #dataNascita="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && dataNascita.errors }"
+        >
+        <div *ngIf="dataNascita.errors && f.submitted" class="invalid-feedback">
+          Il campo data di nascita è obbligatorio!
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <input type="submit" value="Registrati">
+      </div>
+
+
+    </form>
+    <div class="divider">
+      <span>oppure</span>
+    </div>
+    <br>
+    <button (click)="switchLoginRegister()">Torna al Login</button>
+  </div>
+</div>

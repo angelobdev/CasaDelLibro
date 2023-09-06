@@ -1,0 +1,238 @@
+.carrello {
+  width: 100%;
+  height: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+
+.carrello .libri {
+  width: 100%;
+  height: calc(100% - 6rem);
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+
+  overflow-y: scroll;
+}
+
+.carrello .libri ul {
+  width: 90%;
+  height: 100%;
+
+  list-style: none;
+  padding: 0;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+
+.carrello .libri ul li {
+  width: 100%;
+  background: #758BFD;
+  color: white;
+
+  padding: 1rem;
+  margin-bottom: 0.4rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+
+  border-radius: 0.6rem;
+  border: none;
+
+  box-shadow: 0 2px 2px #0004;
+}
+
+.carrello .libri ul li .infobox {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.carrello .libri ul li .quantita {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: row;
+}
+
+.carrello .libri ul li .quantita span {
+  width: 2rem;
+  height: 1.6rem;
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: white;
+  border: none;
+
+  color:black;
+}
+
+.carrello .libri ul li .quantita button {
+  color: white;
+  width: 1.6rem;
+  height: 1.6rem;
+  background: #2F4858;
+  transition: 0.4s;
+  border: none;
+  padding: 0;
+}
+
+.carrello .libri ul li .quantita button:first-child {
+  border-radius: 0.4rem 0 0 0.4rem;
+}
+
+.carrello .libri ul li .quantita button:last-child {
+  border-radius: 0 0.4rem 0.4rem 0;
+}
+
+.carrello .libri ul li .quantita button:hover {
+  background: #3a4c57;
+  transition: 0.4s;
+  transform: scale(102%);
+  cursor: pointer;
+}
+
+.carrello .libri ul li .quantita button:active {
+  background: #454e54;
+  transition: 0.4s;
+}
+
+.carrello .consegna {
+  width: 100%;
+  height: 14rem;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+
+  border-top: 1px solid #0002;
+  border-bottom: 1px solid #0002;
+  padding-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.carrello .consegna .modalita {
+  width: 80%;
+  height: 2rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+
+.carrello .consegna .form {
+  width: 100%;
+}
+
+.carrello .consegna .form label{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.carrello .consegna .form input{
+  width: 90%;
+  height: 2rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  border: 1px solid #0002;
+  border-radius: 0.4rem;
+
+}
+
+.carrello .consegna .form input[type=date]{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+
+.carrello .info {
+  width: 100%;
+  height: 3rem;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+}
+
+.carrello .info p {
+  font-size: 1.4rem;
+}
+
+.carrello .buttons {
+  width: 100%;
+  height: 3rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+
+.carrello .buttons button {
+  width: 40%;
+  height: 100%;
+
+  color: white;
+  border: none;
+  border-radius: 0.6rem;
+  transition: 0.2s;
+  box-shadow: 0 2px 2px #0002;
+}
+
+.carrello .buttons button:hover {
+  transition: 0.2s;
+  transform: scale(102%);
+}
+
+.carrello .buttons button:first-child {
+  background: #2F4858;
+}
+
+.carrello .buttons button:first-child:hover {
+  background: #3e4c56;
+}
+
+.carrello .buttons button:first-child:active {
+  background: #454c50;
+}
+
+.carrello .buttons button:last-child {
+  background: #bd2c2c;
+}
+
+.carrello .buttons button:last-child:hover {
+  background: #b64e4e;
+}
+
+.carrello .buttons button:last-child:active {
+  background: #b46a6a;
+}

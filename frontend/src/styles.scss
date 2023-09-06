@@ -1,1 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
+* {
+  font-family: "Muli", sans-serif;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #F1F2F6;
+  margin: 0;
+}
+
+

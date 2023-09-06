@@ -1,5 +1,6 @@
 package com.angelobdev.casadellibro.model;
 
+import com.angelobdev.casadellibro.model.support.CarrelloLibro;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,7 +15,7 @@ import java.util.List;
 public class Carrello {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "carrelli_id_seq")
     @SequenceGenerator(name = "carrelli_id_seq", allocationSize = 1)
     @Column(name = "id")
     private Integer id;
@@ -32,9 +33,8 @@ public class Carrello {
     @JoinColumn(name = "utente_id")
     private Utente utente;
 
-    @OneToMany
-    @JoinTable(name = "carrelli_libri",
-            joinColumns = @JoinColumn(name = "carrello_id"),
-            inverseJoinColumns = @JoinColumn(name = "libro_id"))
-    private List<Libro> libri;
+    @OneToMany(mappedBy = "carrello")
+    @OrderBy("id ASC")
+    private List<CarrelloLibro> libri;
+    
 }
