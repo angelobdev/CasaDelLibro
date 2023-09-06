@@ -1,5 +1,6 @@
 package com.angelobdev.casadellibro.service;
 
+import com.angelobdev.casadellibro.model.Libro;
 import com.angelobdev.casadellibro.model.Utente;
 import com.angelobdev.casadellibro.repository.UtenteRepository;
 import jakarta.transaction.Transactional;
@@ -10,6 +11,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UtenteService implements UserDetailsService {
@@ -44,6 +47,12 @@ public class UtenteService implements UserDetailsService {
         toUpdate.setAvatar(utente.getAvatar());
 
         return utenteRepository.save(toUpdate);
+    }
+
+    public List<Libro> getLibriPreferiti(Integer id) {
+        Utente utente = utenteRepository.findById(id).orElse(null);
+        assert utente != null;
+        return utente.getLibriPreferiti();
     }
 
     @Override

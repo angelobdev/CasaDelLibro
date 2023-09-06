@@ -39,8 +39,22 @@
         <p>{{libro.quantita}} in stock</p>
       </div>
       <div class="buttons">
-        <button *ngIf="isLoggedIn" (click)="aggiungiLibroAlCarrello(libro.id)">Aggiungi al Carrello</button>
-        <button *ngIf="!isLoggedIn" (click)="alertNotLogged()">Aggiungi al Carrello</button>
+        <!--AGGIUNGI AL CARRELLO-->
+        <button class="acquista" *ngIf="isLoggedIn" (click)="aggiungiLibroAlCarrello(libro.id)">
+          Aggiungi al Carrello <!-- Loggato -->
+        </button>
+        <button class="acquista" *ngIf="!isLoggedIn" (click)="alertNotLogged()">
+          Aggiungi al Carrello <!--Non Loggato-->
+        </button>
+
+        <!--LIKE-->
+        <button class="like" *ngIf="isLoggedIn" (click)="toggleLike(libro.id)">
+          <fa-icon [icon]="isLibroPreferito(libro.id) ? faLikeFull : faLikeEmpty"></fa-icon>
+        </button>
+        <button class="like" *ngIf="!isLoggedIn" (click)="alertNotLogged()">
+          <fa-icon [icon]="faLikeEmpty"></fa-icon>
+        </button>
+
       </div>
       <p>ISBN: {{libro.id + 9788800000000}}</p>
     </div>

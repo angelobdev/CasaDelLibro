@@ -15,6 +15,10 @@ public class LibroService {
 
     // CRUD
 
+    public Libro getById(Integer id) {
+        return libroRepository.findById(id).orElse(null);
+    }
+
     public List<Libro> getAll() {
         return libroRepository.findAllByOrderByTitoloAsc();
     }

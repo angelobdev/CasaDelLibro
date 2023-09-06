@@ -3,8 +3,11 @@ import {LibroService} from "../../services/libro.service";
 import {Carrello} from "../../models/carrello.model";
 import {Libro} from "../../models/libro.model";
 import {CarrelloService} from "../../services/carrello.service";
-import {faArrowDownWideShort, faBars, faClose, faSearch} from '@fortawesome/free-solid-svg-icons';
 import {AuthService} from "../../services/auth.service";
+import * as far from "@fortawesome/free-regular-svg-icons";
+import * as fas from "@fortawesome/free-solid-svg-icons";
+import {UtenteService} from "../../services/utente.service";
+import {StorageService} from "../../services/storage.service";
 
 @Component({
   selector: 'app-biblioteca',
@@ -15,11 +18,14 @@ export class BibliotecaComponent implements OnInit {
 
   isLoggedIn = false;
   listaLibri: Array<Libro> = [];
+  libriPreferiti: Array<Libro> = [];
   carrello: Carrello | null = null;
 
   // Icone
-  faSearch = faSearch;
-  faSort = faArrowDownWideShort;
+  faSearch = fas.faSearch;
+  faSort = fas.faArrowDownWideShort;
+  faLikeEmpty = far.faHeart;
+  faLikeFull = fas.faHeart;
 
   // Sort
   asc = false;
@@ -27,7 +33,7 @@ export class BibliotecaComponent implements OnInit {
   // Ricerca
   ricerca: string = "";
 
-  constructor(private libroService: LibroService, private carrelloService: CarrelloService, private authService: AuthService) {
+  constructor(private storageService: StorageService, private libroService: LibroService, private carrelloService: CarrelloService, private authService: AuthService, private utenteService: UtenteService) {
   }
 
   ngOnInit(): void {
@@ -44,6 +50,10 @@ export class BibliotecaComponent implements OnInit {
     });
 
     if (this.authService.isLoggedIn()) {
+
+      let utenteID = this.storageService.getJWToken()!.id;
+
+      // Carico il carrello
       this.carrelloService.getUpdate().subscribe({
         next: data => {
           this.carrello = data;
@@ -52,11 +62,23 @@ export class BibliotecaComponent implements OnInit {
           console.log(err);
         }
       });
+
+      // Carico i libri preferiti
+      this.utenteService.getLibriPreferiti(utenteID).subscribe({
+        next: libri => {
+          this.libriPreferiti = libri;
+        },
+        error: err => {
+          console.log(err);
+        }
+      });
+
     }
+
   }
 
   alertNotLogged() {
-    alert("Non sei loggato!");
+    alert("Esegui il login prima!");
   }
 
   ampliaDescrizione(id: number) {
@@ -103,6 +125,39 @@ export class BibliotecaComponent implements OnInit {
 
   }
 
+  toggleLike(libroID: number) {
+
+    let utenteID = this.storageService.getJWToken()!.id;
+
+    this.utenteService.toggleLike(utenteID, libroID).subscribe({
+      next: isLike => {
+        console.log(isLike ? "Il libro ti piace" : "Il libro non ti piace");
+
+        // Carico i libri preferiti
+        this.utenteService.getLibriPreferiti(utenteID).subscribe({
+          next: libri => {
+            this.libriPreferiti = libri;
+          },
+          error: err => {
+            console.log(err);
+          }
+        });
+      },
+      error: err => {
+        console.log(err);
+      }
+    })
+  }
+
+  isLibroPreferito(libroID: number) {
+    let isPreferito = false;
+    this.libriPreferiti.forEach((libro) => {
+      if (libro.id == libroID)
+        isPreferito = true;
+    });
+    return isPreferito;
+  }
+
   sortByTitolo() {
     this.listaLibri = this.listaLibri.sort((a, b) => {
       return this.asc ? a.titolo.localeCompare(b.titolo) : b.titolo.localeCompare(a.titolo);
@@ -132,8 +187,4 @@ export class BibliotecaComponent implements OnInit {
     })
     this.asc = !this.asc;
   }
-
-  protected readonly alert = alert;
-  protected readonly faBars = faBars;
-  protected readonly faClose = faClose;
 }
