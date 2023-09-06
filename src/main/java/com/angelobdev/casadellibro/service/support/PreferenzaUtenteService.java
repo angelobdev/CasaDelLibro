@@ -1,13 +1,8 @@
 package com.angelobdev.casadellibro.service.support;
 
-import com.angelobdev.casadellibro.model.Utente;
 import com.angelobdev.casadellibro.model.support.PreferenzaUtente;
 import com.angelobdev.casadellibro.repository.support.PreferenzaUtenteRepository;
-import com.angelobdev.casadellibro.service.LibroService;
-import com.angelobdev.casadellibro.service.UtenteService;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
 @Service

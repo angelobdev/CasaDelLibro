@@ -1,9 +1,7 @@
 package com.angelobdev.casadellibro.model.support;
 
-import com.angelobdev.casadellibro.model.Carrello;
 import com.angelobdev.casadellibro.model.Libro;
 import com.angelobdev.casadellibro.model.Utente;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
