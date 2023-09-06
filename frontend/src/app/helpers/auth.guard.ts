@@ -1,7 +1,24 @@
-import {CanActivateFn} from '@angular/router';
+import {CanActivateFn, Router} from '@angular/router';
+import {inject} from "@angular/core";
+import {AuthService} from "../services/auth.service";
 
-export const authGuard: CanActivateFn = (route, state) => {
-  // TODO: check ruolo
-  console.log(route, state);
-  return true;
+export const authGuard: CanActivateFn = (route, _) => {
+    let authService = inject(AuthService);
+    let router = inject(Router);
+    let subURL = route.routeConfig!.path!;
+
+    if (!authService.isLoggedIn()) {
+        switch (subURL) {
+            case "account":
+                router.navigate(['']).then(() => {
+                    alert("Non puoi accedere a questo URL!");
+                });
+                return false;
+            default:
+                return true;
+        }
+    }
+
+    return true;
 };
+
