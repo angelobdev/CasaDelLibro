@@ -2,10 +2,7 @@ package com.angelobdev.casadellibro.service;
 
 import com.angelobdev.casadellibro.model.Utente;
 import com.angelobdev.casadellibro.repository.UtenteRepository;
-import com.angelobdev.casadellibro.security.JwtUtils;
 import jakarta.transaction.Transactional;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
