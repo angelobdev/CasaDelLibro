@@ -7,31 +7,31 @@ import {AccountComponent} from "./routes/account/account.component";
 import {authGuard} from "./helpers/auth.guard";
 
 const routes: Routes = [
-    {
-        path: '',
-        component: HomeComponent,
-        canActivate: [authGuard]
-    },
-    {
-        path: 'biblioteca',
-        component: BibliotecaComponent,
-        canActivate: [authGuard]
-    },
-    {
-        path: 'azienda',
-        component: AziendaComponent,
-        canActivate: [authGuard]
-    },
-    {
-        path: 'account',
-        component: AccountComponent,
-        canActivate: [authGuard]
-    },
+  {
+    path: '',
+    component: HomeComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'biblioteca',
+    component: BibliotecaComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'azienda',
+    component: AziendaComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'account',
+    component: AccountComponent,
+    canActivate: [authGuard]
+  },
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {
 }
