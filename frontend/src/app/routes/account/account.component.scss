@@ -3,22 +3,24 @@
   display: inline-grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
+  margin-top: 1rem;
 }
 
 .account > div {
-  background: #aebbfa;
+  background: #e9eaff;
 
+  border: 1px solid #0002;
   border-radius: 0.6rem;
-  padding: 1rem;
+  box-shadow: 0 0 10px #0002;
+
 
   display: flex;
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-}
 
-.account div h1 {
-  border-bottom: 1px solid #0002;
+  margin: 0;
+  padding: 1rem;
 }
 
 .account .gestione-account {
@@ -38,7 +40,7 @@
 }
 
 .account .gestione-account .input-line:nth-child(even) {
-  background: #0002;
+  background: #AEB8FE44;
 }
 
 .account .gestione-account .input-line input {
@@ -71,4 +73,40 @@
 
 .account .libri-preferiti {
   grid-column: span 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
 }
+
+.account .libri-preferiti ul {
+  width: 100%;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+
+  overflow-y: scroll;
+}
+
+.account .libri-preferiti ul li {
+  width: 100%;
+  margin-bottom: 0.4rem;
+  border-radius: 0.4rem;
+}
+
+.account .libri-preferiti ul li:nth-child(even){
+  background: #AEB8FE88;
+}
+
+.account .libri-preferiti ul li:nth-child(odd) {
+  background: #AEB8FE44;
+}
+
+.account .libri-preferiti ul li p {
+  padding: 0.4rem;
+}
+

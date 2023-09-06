@@ -45,6 +45,10 @@
   </div>
   <div class="libri-preferiti">
     <h1>Libri preferiti</h1>
-    <p>{{utente!.libriPreferiti.length}} libri presenti</p>
+    <ul>
+      <li *ngFor="let libro of utente!.libriPreferiti">
+        <p>{{libro.titolo}} di {{libro.autore}}</p>
+      </li>
+    </ul>
   </div>
 </div>
