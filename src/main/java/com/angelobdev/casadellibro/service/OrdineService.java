@@ -4,7 +4,10 @@ import com.angelobdev.casadellibro.model.*;
 import com.angelobdev.casadellibro.model.support.CarrelloLibro;
 import com.angelobdev.casadellibro.repository.LibroRepository;
 import com.angelobdev.casadellibro.repository.OrdineRepository;
+import jakarta.persistence.LockModeType;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Lock;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -30,6 +33,8 @@ public class OrdineService {
 
     // CRUD
 
+    @Transactional
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
     public Ordine create(Integer carrelloID, Integer spedizioneID, Integer ritiroID) {
 
         // CHECK
