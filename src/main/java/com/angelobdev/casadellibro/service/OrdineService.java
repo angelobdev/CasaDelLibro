@@ -34,13 +34,17 @@ public class OrdineService {
     // CRUD
 
     @Transactional
-    @Lock(LockModeType.PESSIMISTIC_WRITE)
+    @Lock(LockModeType.OPTIMISTIC) // REV: viene ignorato
     public Ordine create(Integer carrelloID, Integer spedizioneID, Integer ritiroID) {
+
+        // REV: sostituire eccezioni con messaggi di errore
 
         // CHECK
         if (spedizioneID > 0 && ritiroID > 0) {
             throw new RuntimeException("Un ordine non puo' essere associato ad entrambi spedizione e ritiro!");
         }
+
+        // REV: controllo consistenza dati tra client e database
 
         // Carico il carrello
         Carrello carrello = carrelloService.getById(carrelloID);
@@ -65,8 +69,8 @@ public class OrdineService {
         // Decremento le quantita in magazzino
         for (CarrelloLibro cl : carrello.getLibri()) {
             Libro libro = cl.getLibro();
-            libro.setQuantita(libro.getQuantita() - cl.getQuantita());
-            libroRepository.save(libro);
+            libro.setQuantita(libro.getQuantita() - cl.getQuantita());  // REV: check > 0
+            libroRepository.save(libro);                                // REV: rim
         }
 
         return ordineRepository.save(ordine);
